@@ -1,0 +1,33 @@
+version: "3.3"
+
+services:
+  postgres:
+    container_name: sdb-postgres
+    image: postgresql:11.6
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: sante
+    restart: always
+
+  redis:
+    container_name: sdb-redis
+    image: redis
+    ports:
+      - "6379:6379"
+    restart: always
+
+  santempi:
+    container_name: sdb-santedb
+    image: santedb/icdr:latest
+    environment:
+      - SDB_DATABASE=npgsql
+      - SDB_DATABASE_CONNECTION="server=sdb-postgres;database=santempi;user=postgres;password=postgres"
+      - SDB_CACHE=redis://sdb-redis:6379
+    ports:
+      - "8080:8080"
+      - "2100:2100"
+    depends_on:
+      - postgresql
+      - redis
+    restart: always
