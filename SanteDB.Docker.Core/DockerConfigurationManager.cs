@@ -133,6 +133,10 @@ namespace SanteDB.Docker.Core
                 return this.m_configuration.GetSection<DataConfigurationSection>().ConnectionString.Find(o => o.Name == key);
             else {
                 var provider = Environment.GetEnvironmentVariable($"{DockerConstants.EnvConnectionStringPrefix}{key.ToUpper()}_PROVIDER");
+                
+                if(String.IsNullOrEmpty(provider)) 
+                    Environment.GetEnvironmentVariable($"{DockerConstants.EnvConnectionStringPrefix}_PROVIDER");
+
                 if (!String.IsNullOrEmpty(provider))
                     return new ConnectionString(provider.ToString(), retVal);
                 else
