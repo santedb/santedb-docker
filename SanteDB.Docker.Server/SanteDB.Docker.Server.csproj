@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(VersionNumber)' == ''">
+    <VersionNumber>2.1.0-debug</VersionNumber>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -193,13 +197,13 @@
     <Otherwise>
       <ItemGroup>
         <PackageReference Include="SanteDB.Messaging.Atna">
-          <Version>2.1.3</Version>
+          <Version>$(VersionNumber)</Version>
         </PackageReference>
         <PackageReference Include="SanteDB.Server">
-          <Version>2.1.3</Version>
+          <Version>$(VersionNumber)</Version>
         </PackageReference>
         <PackageReference Include="SanteDB.Server.Plugin">
-          <Version>2.1.3</Version>
+          <Version>$(VersionNumber)</Version>
         </PackageReference>
       </ItemGroup>
     </Otherwise>
@@ -228,4 +232,11 @@
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="BeforeBuild" Condition="!$(VersionNumber.EndsWith('-debug'))">
+    <AssemblyInfo CodeLanguage="CS" OutputFile="$(MSBuildProjectDirectory)\Properties\Version.cs" AssemblyVersion="$(VersionNumber)" AssemblyFileVersion="$(VersionNumber)" />
+  </Target>
+  <ItemGroup>
+    <Compile Include="Properties\Version.cs" />
+  </ItemGroup>
+
 </Project>
