@@ -16,7 +16,7 @@ namespace SanteDB.Docker.Core
         /// </summary>
         public static TConfiguration LoadConfigurationResource<TConfiguration>(String resourceName) where TConfiguration : IConfigurationSection
         {
-            using (var str = typeof(DockerFeatureUtils).Assembly.GetManifestResourceStream(resourceName))
+            using (var str = typeof(TConfiguration).Assembly.GetManifestResourceStream(resourceName) ?? typeof(DockerFeatureUtils).Assembly.GetManifestResourceStream(resourceName))
             {
                 var config = SanteDBConfiguration.Load(str);
                 return config.GetSection<TConfiguration>();

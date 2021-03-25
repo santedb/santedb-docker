@@ -51,18 +51,25 @@ namespace SanteDB.Docker.Core
                 IDictionary<String, IDockerFeature> features = new Dictionary<String, IDockerFeature>();
 
                 // Load all assemblies into our appdomain 
-                foreach(var f in Directory.GetFiles("*.dll"))
+                foreach(var f in Directory.GetFiles(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "*.dll"))
                 {
-                    var rfoAsm = Assembly.ReflectionOnlyLoadFrom(f);
-                    if(rfoAsm.GetExportedTypes().Any(t=>t.GetInterface(typeof(IDockerFeature).FullName) != null))
+                    try
                     {
-                        var fAsm = Assembly.LoadFrom(f);
-                        foreach(var feature in fAsm.ExportedTypes
-                            .Where(t=>typeof(IDockerFeature).IsAssignableFrom(t) && !t.IsAbstract && !t.IsInterface)
-                            .Select(t=>Activator.CreateInstance(t) as IDockerFeature) )
+                        var rfoAsm = Assembly.LoadFile(f);
+                        if (rfoAsm.GetExportedTypes().Any(t => t.GetInterface(typeof(IDockerFeature).FullName) != null))
                         {
-                            features.Add(feature.Id, feature);
+                            var fAsm = Assembly.LoadFrom(f);
+                            foreach (var feature in fAsm.ExportedTypes
+                                .Where(t => typeof(IDockerFeature).IsAssignableFrom(t) && !t.IsAbstract && !t.IsInterface)
+                                .Select(t => Activator.CreateInstance(t) as IDockerFeature))
+                            {
+                                features.Add(feature.Id, feature);
+                            }
                         }
+                    }
+                    catch // ignore
+                    {
+                        
                     }
                 }
 
@@ -79,6 +86,13 @@ namespace SanteDB.Docker.Core
                         feature.Configure(this.m_configuration, settings);
                     }
                 }
+
+                // Attempt to write out diagnostic log
+                    using (var fs = File.Create($"docker.lastconfig"))
+                    {
+                        this.m_configuration.Save(fs);
+                        fs.Flush();
+                    }
                 
             }
             catch (Exception e)
@@ -114,13 +128,13 @@ namespace SanteDB.Docker.Core
         /// </summary>
         public ConnectionString GetConnectionString(string key)
         {
-            var retVal = Environment.GetEnvironmentVariable($"{DockerConstants.EnvConnectionStringPrefix}_{key.ToUpper()}");
+            var retVal = Environment.GetEnvironmentVariable($"{DockerConstants.EnvConnectionStringPrefix}{key.ToUpper()}");
             if (String.IsNullOrEmpty(retVal))
                 return this.m_configuration.GetSection<DataConfigurationSection>().ConnectionString.Find(o => o.Name == key);
             else {
-                var objData = retVal.Split(';').Select(o => o.Split('=')).ToDictionary(o => o[0], o => (object)o[1]);
-                if (objData.TryGetValue("_provider", out object pvdr))
-                    return new ConnectionString(pvdr.ToString(), objData);
+                var provider = Environment.GetEnvironmentVariable($"{DockerConstants.EnvConnectionStringPrefix}{key.ToUpper()}_PROVIDER");
+                if (!String.IsNullOrEmpty(provider))
+                    return new ConnectionString(provider.ToString(), retVal);
                 else
                     throw new ConfigurationException($"No provider configurated for {key}", this.m_configuration);
             }

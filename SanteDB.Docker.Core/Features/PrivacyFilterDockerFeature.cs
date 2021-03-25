@@ -56,7 +56,7 @@ namespace SanteDB.Docker.Core.Features
 
             if(settings.TryGetValue(ResourceTypeSetting, out string resources))
             {
-                privacyConf.Resources = resources.Split(',').Select(o => new ResourceDataPolicyFilter()
+                privacyConf.Resources = resources.Split(';').Select(o => new ResourceDataPolicyFilter()
                 {
                     ResourceTypeXml = o,
                     Action = privacyConf.DefaultAction
