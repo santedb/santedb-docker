@@ -5,10 +5,10 @@ services:
     image: postgres
     container_name: sdb-postgres
     ports:
-      - "5432:5432"
+      - 5432:5432
     environment:
-      POSTGRES_USER: santedb
-      POSTGRES_PASSWORD: SanteDB123
+      - POSTGRES_USER=santedb
+      - POSTGRES_PASSWORD=SanteDB123
     restart: always
 
   santedb:
@@ -24,8 +24,8 @@ services:
       - SDB_DATA_POLICY_ACTION=HIDE
       - SDB_DELAY_START=5000
     ports:
-      - "8080:8080"
-      - "2100:2100"
+      - 8080:8080
+      - 2100:2100
     volumes:
       - santedb-mpi-seed:/santedb/data
       - santedb-mpi-config:/santedb/config
