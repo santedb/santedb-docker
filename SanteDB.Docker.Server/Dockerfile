@@ -4,6 +4,8 @@ MAINTAINER "SanteSuite Contributors"
 RUN mkdir /santedb
 RUN mkdir /santedb/data
 COPY ./bin/Release/ /santedb/
+# RUN mv -vf /santedb/Data/*.dataset /santedb/data/
+# RUN rm -rf /santedb/Data
 WORKDIR /santedb
 EXPOSE 2100/tcp
 EXPOSE 8080/tcp
