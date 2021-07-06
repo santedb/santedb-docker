@@ -42,8 +42,10 @@ namespace SanteDB.Docker.Server
                 {
                     Console.WriteLine("Waiting for {0} ms before start...", waitInt);
                     Thread.Sleep(waitInt);
+                    Console.WriteLine("Continuing startup...");
                 }
                 IConfigurationManager configurationManager = null;
+
                 if (args?.Length == 1) // User passed an alternate configuration file
                     configurationManager = new DockerConfigurationManager(args[0]);
                 else
