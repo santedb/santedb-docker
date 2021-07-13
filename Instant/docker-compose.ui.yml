@@ -30,3 +30,11 @@ services:
       - db
     restart: always
     
+  www:
+    image: santesuite/santedb-www:latest
+    container_name: santedb-www
+    ports:
+      - "9200:9200"
+    depends_on:
+      - santedb
+    restart: always
