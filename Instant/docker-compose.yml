@@ -37,4 +37,8 @@ services:
 volumes:
   sdb-mpi-seed:
   sdb-mpi-config:
+<<<<<<< HEAD
   sdb-mpi-app:
+=======
+  sdb-mpi-app:
+>>>>>>> 60de2065ab18383830656a0aea72cf3af3ea45f8
