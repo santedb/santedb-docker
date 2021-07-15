@@ -29,12 +29,7 @@
   <include>config/santedb.rest.config.xml</include>
   <include>config/santedb.applets.config.xml</include>
   <include>config/santedb.jobs.config.xml</include>
-  <section xsi:type="DataConfigurationSection">
-    <connectionStrings>
-      <add name="MAIN" value="server=sdb-postgres;port=5432; database=santedb; user id=postgres; password=postgres; pooling=true; MinPoolSize=5; MaxPoolSize=15; Timeout=60; " provider="Npgsql"/>
-      <add name="AUDIT" value="server=sdb-postgres;port=5432; database=auditdb; user id=postgres; password=postgres; pooling=true; MinPoolSize=5; MaxPoolSize=15; Timeout=60; " provider="Npgsql"/>
-    </connectionStrings>
-  </section>
+ 
   <section xsi:type="OrmConfigurationSection">
     <providers>
       <add type="SanteDB.OrmLite.Providers.Postgres.PostgreSQLProvider, SanteDB.OrmLite" invariant="npgsql" />
