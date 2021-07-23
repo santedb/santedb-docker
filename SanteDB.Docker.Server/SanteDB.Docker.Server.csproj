@@ -231,7 +231,7 @@
     <Content Include="santedb.config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="env-mpi.bat">
+    <None Include="env-mpi-reset.bat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
