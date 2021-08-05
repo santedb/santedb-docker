@@ -54,11 +54,17 @@ namespace SanteDB.Docker.Server
                 // Start the host process
                 ServiceUtil.Start(Guid.NewGuid(), configurationManager);
 
+                Console.WriteLine("Service startup completed...");
                 if (Environment.OSVersion.Platform == PlatformID.Win32NT)
                 {
                     // Wait until cancel key is pressed
                     var mre = new ManualResetEventSlim(false);
-                    Console.CancelKeyPress += (o, e) => mre.Set();
+                    Console.CancelKeyPress += (o, e) =>
+                    {
+                        Console.WriteLine("Sending request to shutdown...");
+                        ServiceUtil.Stop();
+                        mre.Set();
+                    };
                     mre.Wait();
                 }
                 else
@@ -72,10 +78,11 @@ namespace SanteDB.Docker.Server
         new UnixSignal(Mono.Unix.Native.Signum.SIGHUP)
                     };
                     int signal = UnixSignal.WaitAny(signals);
+                    // Gracefully shutdown
+                    ServiceUtil.Stop();
                 }
 
-                // Gracefully shutdown
-                ServiceUtil.Stop();
+               
             }
             catch(Exception e)
             {

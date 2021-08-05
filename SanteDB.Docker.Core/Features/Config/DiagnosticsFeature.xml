@@ -5,7 +5,7 @@
   <!-- Logging Configuration -->
   <section xsi:type="DiagnosticsConfigurationSection">
     <writers>
-      <add name="main" initializationData="/var/log/santedb.log" filter="Warning">
+      <add name="main" initializationData="log\santedb.log" filter="Warning">
         <writer>SanteDB.Server.Core.Diagnostics.RolloverTextWriterTraceWriter, SanteDB.Server.Core</writer>
       </add>
       <add name="console" initializationData="stdout" filter="Informational">
