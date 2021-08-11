@@ -93,14 +93,6 @@
           <Project>{3bfd6ee6-0267-4d82-be7d-9b48b2f6f3d4}</Project>
           <Name>SanteDB.BusinessRules.JavaScript</Name>
         </ProjectReference>
-        <ProjectReference Include="..\..\santedb-cache-memory\SanteDB.Caching.Memory\SanteDB.Caching.Memory.csproj">
-          <Project>{8553abc7-abfa-4a21-b0e8-68b7de76129d}</Project>
-          <Name>SanteDB.Caching.Memory</Name>
-        </ProjectReference>
-        <ProjectReference Include="..\..\santedb-cache-redis\SanteDB.Caching.Redis\SanteDB.Caching.Redis.csproj">
-          <Project>{86672094-25cc-4cd5-b085-240e50ec4a5e}</Project>
-          <Name>SanteDB.Caching.Redis</Name>
-        </ProjectReference>
         <ProjectReference Include="..\..\santedb-cdss\SanteDB.Cdss.Xml\SanteDB.Cdss.Xml.csproj">
           <Project>{cad6bcb7-758b-4aa4-a5fe-a9fab8a4cf2f}</Project>
           <Name>SanteDB.Cdss.Xml</Name>
@@ -176,10 +168,6 @@
         <ProjectReference Include="..\..\SanteDB.Persistence.Auditing.ADO\SanteDB.Persistence.Auditing.ADO.csproj">
           <Project>{45ea67a6-48f6-4906-84ec-5c13c80c9cc4}</Project>
           <Name>SanteDB.Persistence.Auditing.ADO</Name>
-        </ProjectReference>
-        <ProjectReference Include="..\..\SanteDB.Persistence.Data.ADO\SanteDB.Persistence.Data.ADO.csproj">
-          <Project>{f38ed54c-e4e4-499a-882e-736289f332c0}</Project>
-          <Name>SanteDB.Persistence.Data.ADO</Name>
         </ProjectReference>
         <ProjectReference Include="..\..\SanteDB.Persistence.PubSub.ADO\SanteDB.Persistence.PubSub.ADO.csproj">
           <Project>{03052730-be5d-4212-9b71-316c685dd245}</Project>
