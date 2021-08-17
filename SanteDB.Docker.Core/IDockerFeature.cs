@@ -32,5 +32,6 @@ namespace SanteDB.Docker.Core
         /// <param name="configuration">The configuration into which the feature should be configured</param>
         /// <param name="settings">Settings which were parsed from the environment in SDB_{this.Id}_{Key}={Value}</param>
         void Configure(SanteDBConfiguration configuration, IDictionary<String, String> settings);
+
     }
 }
