@@ -86,6 +86,7 @@
       <add type="SanteDB.Server.Core.Services.Daemons.AppletBusinessRulesDaemon, SanteDB.Server.Core" />
 
       <add type="SanteDB.Core.Data.Quality.DataQualityService, SanteDB.Core.Api"/>
+      <add type="SanteDB.Core.Applets.Services.Impl.AppletLocalizationService, SanteDB.Core.Applets"/>
       <!--<add type="SanteMPI.Persistence.ADO.Services.AdoNameAliasService, SanteMPI.Persistence.ADO"/>-->
 
     </serviceProviders>

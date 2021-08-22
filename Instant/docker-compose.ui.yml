@@ -26,6 +26,8 @@ services:
     ports:
       - "8080:8080"
       - "2100:2100"
+    volumes: 
+      - santedb-data:/santedb/data
     depends_on:
       - db
     restart: always
@@ -38,3 +40,6 @@ services:
     depends_on:
       - santedb
     restart: always
+
+volumes:
+    santedb-data:
