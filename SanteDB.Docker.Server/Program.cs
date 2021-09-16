@@ -25,12 +25,12 @@ namespace SanteDB.Docker.Server
             {
 
 #if DEBUG
-            // Minimum services for startup
-            if(String.IsNullOrEmpty(Environment.GetEnvironmentVariable("SDB_FEATURE")))
-            {
-                Environment.SetEnvironmentVariable("SDB_FEATURE", "RAMCACHE;ADO;PUBSUB_ADO;SEC;LOG;FHIR;HL7;HDSI;AMI;BIS;SWAGGER;AUDIT_REPO;OPENID");
-                Environment.SetEnvironmentVariable("SDB_DB_AUDIT", "server=sdb-postgres; database=audit; user=santedb; password=SanteDB123");
-                Environment.SetEnvironmentVariable("SDB_DB_MAIN", "server=sdb-postgres; database=audit; user=santedb; password=SanteDB123");
+                // Minimum services for startup
+                if (String.IsNullOrEmpty(Environment.GetEnvironmentVariable("SDB_FEATURE")))
+                {
+                    Environment.SetEnvironmentVariable("SDB_FEATURE", "RAMCACHE;ADO;PUBSUB_ADO;SEC;LOG;FHIR;HL7;HDSI;AMI;BIS;SWAGGER;AUDIT_REPO;OPENID");
+                    Environment.SetEnvironmentVariable("SDB_DB_AUDIT", "server=sdb-postgres; database=audit; user=santedb; password=SanteDB123");
+                    Environment.SetEnvironmentVariable("SDB_DB_MAIN", "server=sdb-postgres; database=audit; user=santedb; password=SanteDB123");
                     Environment.SetEnvironmentVariable("SDB_DB_MAIN_PROVIDER", "Npgsql");
                     Environment.SetEnvironmentVariable("SDB_DB_AUDIT_PROVIDER", "Npgsql");
                 }
@@ -38,7 +38,7 @@ namespace SanteDB.Docker.Server
                 // Wait ?
                 // HACK: Docker doesn't wait for other services to come up
                 var wait = Environment.GetEnvironmentVariable("SDB_DELAY_START");
-                if(!String.IsNullOrEmpty(wait) && Int32.TryParse(wait, out int waitInt))
+                if (!String.IsNullOrEmpty(wait) && Int32.TryParse(wait, out int waitInt))
                 {
                     Console.WriteLine("Waiting for {0} ms before start...", waitInt);
                     Thread.Sleep(waitInt);
@@ -82,9 +82,9 @@ namespace SanteDB.Docker.Server
                     ServiceUtil.Stop();
                 }
 
-               
+
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine("FATAL ERROR: HALTING SANTEDB HOST PROCESS : {0}", e);
             }
