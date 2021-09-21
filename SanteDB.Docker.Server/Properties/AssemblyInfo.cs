@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("SanteDB iCDR Server Docker Host")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SanteDB iCDR Server")]
-[assembly: AssemblyCopyright("Copyright ©  2021")]
+[assembly: AssemblyCompany("SanteSuite Contributors")]
+[assembly: AssemblyProduct("SanteDB iCDR Server for Docker")]
+[assembly: AssemblyCopyright("Copyright ©  2021 SanteSuite Inc.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
