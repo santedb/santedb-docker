@@ -28,7 +28,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace SanteDB.Docker.Core
 {
@@ -71,7 +70,7 @@ namespace SanteDB.Docker.Core
                 IDictionary<String, IDockerFeature> features = new Dictionary<String, IDockerFeature>();
 
                 // Load all assemblies into our appdomain 
-                foreach(var f in Directory.GetFiles(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "*.dll"))
+                foreach (var f in Directory.GetFiles(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "*.dll"))
                 {
                     try
                     {
@@ -89,31 +88,31 @@ namespace SanteDB.Docker.Core
                     }
                     catch // ignore
                     {
-                        
+
                     }
                 }
 
                 // Now enable features
-                foreach(var f in enabledFeatures)
+                foreach (var f in enabledFeatures)
                 {
                     if (!features.TryGetValue(f, out IDockerFeature feature))
                     {
                         throw new InvalidOperationException($"Feature {f} not understood - Known features: {String.Join(",", features.Select(ft => ft.Key))}");
-                    }    
+                    }
                     else
                     {
-                        var settings= Environment.GetEnvironmentVariables().Keys.OfType<String>().Where(d => d.StartsWith($"{DockerConstants.EnvConfigPrefix}{feature.Id}_")).ToDictionary(o => o.Replace($"{DockerConstants.EnvConfigPrefix}{feature.Id}_",""), o => Environment.GetEnvironmentVariable(o));
+                        var settings = Environment.GetEnvironmentVariables().Keys.OfType<String>().Where(d => d.StartsWith($"{DockerConstants.EnvConfigPrefix}{feature.Id}_")).ToDictionary(o => o.Replace($"{DockerConstants.EnvConfigPrefix}{feature.Id}_", ""), o => Environment.GetEnvironmentVariable(o));
                         feature.Configure(this.m_configuration, settings);
                     }
                 }
 
                 // Attempt to write out diagnostic log
-                    using (var fs = File.Create($"docker.lastconfig"))
-                    {
-                        this.m_configuration.Save(fs);
-                        fs.Flush();
-                    }
-                
+                using (var fs = File.Create($"docker.lastconfig"))
+                {
+                    this.m_configuration.Save(fs);
+                    fs.Flush();
+                }
+
             }
             catch (Exception e)
             {
@@ -151,10 +150,11 @@ namespace SanteDB.Docker.Core
             var retVal = Environment.GetEnvironmentVariable($"{DockerConstants.EnvConnectionStringPrefix}{key.ToUpper()}");
             if (String.IsNullOrEmpty(retVal))
                 return this.m_configuration.GetSection<DataConfigurationSection>().ConnectionString.Find(o => o.Name == key);
-            else {
+            else
+            {
                 var provider = Environment.GetEnvironmentVariable($"{DockerConstants.EnvConnectionStringPrefix}{key.ToUpper()}_PROVIDER");
-                
-                if(String.IsNullOrEmpty(provider)) 
+
+                if (String.IsNullOrEmpty(provider))
                     Environment.GetEnvironmentVariable($"{DockerConstants.EnvConnectionStringPrefix}_PROVIDER");
 
                 if (!String.IsNullOrEmpty(provider))

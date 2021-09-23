@@ -24,7 +24,6 @@ using SanteDB.Core.Security.Privacy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SanteDB.Docker.Core.Features
 {
@@ -66,15 +65,16 @@ namespace SanteDB.Docker.Core.Features
             }
 
             // Action settings
-            if(settings.TryGetValue(ActionSetting, out string action)) {
-                if(!Enum.TryParse< ResourceDataPolicyActionType>(action, true, out ResourceDataPolicyActionType actionEnum))
+            if (settings.TryGetValue(ActionSetting, out string action))
+            {
+                if (!Enum.TryParse<ResourceDataPolicyActionType>(action, true, out ResourceDataPolicyActionType actionEnum))
                 {
                     throw new ArgumentOutOfRangeException($"{action} is not recognized as an action (valid: NONE, AUDIT, REDACT, NULLIFY, HIDE, ERROR, HASH)");
                 }
                 privacyConf.DefaultAction = actionEnum;
             }
 
-            if(settings.TryGetValue(ResourceTypeSetting, out string resources))
+            if (settings.TryGetValue(ResourceTypeSetting, out string resources))
             {
                 privacyConf.Resources = resources.Split(';').Select(o => new ResourceDataPolicyFilter()
                 {
