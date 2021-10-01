@@ -29,4 +29,8 @@ services:
       - "2100:2100"
     depends_on:
       - db
+<<<<<<< HEAD
     restart: always
+=======
+
+>>>>>>> develop

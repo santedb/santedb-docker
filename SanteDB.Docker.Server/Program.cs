@@ -1,4 +1,5 @@
 ﻿using Mono.Unix;
+using SanteDB.Core.Security;
 using SanteDB.Core.Services;
 using SanteDB.Docker.Core;
 using SanteDB.Server;
@@ -35,6 +36,11 @@ namespace SanteDB.Docker.Server
                     Environment.SetEnvironmentVariable("SDB_DB_AUDIT_PROVIDER", "Npgsql");
                 }
 #endif
+
+                // Install certs
+                Console.WriteLine("Installing Security Certificiates...");
+                SecurityExtensions.InstallCertsForChain();
+
                 // Wait ?
                 // HACK: Docker doesn't wait for other services to come up
                 var wait = Environment.GetEnvironmentVariable("SDB_DELAY_START");
@@ -87,6 +93,7 @@ namespace SanteDB.Docker.Server
             catch (Exception e)
             {
                 Console.WriteLine("FATAL ERROR: HALTING SANTEDB HOST PROCESS : {0}", e);
+               
             }
 
         }
