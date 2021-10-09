@@ -23,7 +23,6 @@ using SanteDB.Core.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SanteDB.Docker.Core.Features
 {
@@ -72,7 +71,7 @@ namespace SanteDB.Docker.Core.Features
             // Action settings
             if (settings.TryGetValue(SmtpSetting, out string smtpString))
             {
-                if(!Uri.TryCreate(smtpString, UriKind.Absolute, out Uri smtpUri))
+                if (!Uri.TryCreate(smtpString, UriKind.Absolute, out Uri smtpUri))
                 {
                     throw new ArgumentException($"Format of SMTP setting is: smtp[s]://user:pass@server:port");
                 }
@@ -86,7 +85,7 @@ namespace SanteDB.Docker.Core.Features
                     Ssl = smtpUri.Scheme == "smtps"
                 };
             }
-            else if(emailConf.Smtp == null)
+            else if (emailConf.Smtp == null)
             {
                 throw new ConfigurationException("SMTP configuration missing", configuration);
             }
@@ -97,7 +96,7 @@ namespace SanteDB.Docker.Core.Features
                 emailConf.Smtp.From = fromAddress;
             }
 
-            if(settings.TryGetValue(AdminContactSetting, out string admins))
+            if (settings.TryGetValue(AdminContactSetting, out string admins))
             {
                 emailConf.AdministrativeContacts = admins.Split(';').ToList();
             }

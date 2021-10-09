@@ -21,8 +21,6 @@
 using SanteDB.Core.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SanteDB.Docker.Core.Features
 {
@@ -33,7 +31,7 @@ namespace SanteDB.Docker.Core.Features
     {
 
         public const string LogLevelSettings = "LEVEL";
-        
+
         /// <summary>
         /// Gets the identifier of this feature
         /// </summary>
@@ -51,16 +49,16 @@ namespace SanteDB.Docker.Core.Features
         {
 
             var dxConfig = configuration.GetSection<DiagnosticsConfigurationSection>();
-            if(dxConfig == null)
+            if (dxConfig == null)
             {
                 dxConfig = DockerFeatureUtils.LoadConfigurationResource<DiagnosticsConfigurationSection>("SanteDB.Docker.Core.Features.Config.DiagnosticsFeature.xml");
                 configuration.AddSection(dxConfig);
             }
 
             // Set the log level
-            if(settings.TryGetValue(LogLevelSettings, out String level))
+            if (settings.TryGetValue(LogLevelSettings, out String level))
             {
-                if(!Enum.TryParse< System.Diagnostics.Tracing.EventLevel>(level, out System.Diagnostics.Tracing.EventLevel filter))
+                if (!Enum.TryParse<System.Diagnostics.Tracing.EventLevel>(level, out System.Diagnostics.Tracing.EventLevel filter))
                 {
                     throw new ArgumentOutOfRangeException($"Expected values for {this.Id}_{LogLevelSettings} are Informational, Warning, Error, LogAlways");
                 }
