@@ -38,8 +38,15 @@ namespace SanteDB.Docker.Server
 #endif
 
                 // Install certs
-                Console.WriteLine("Installing Security Certificiates...");
-                SecurityExtensions.InstallCertsForChain();
+                try
+                {
+                    Console.WriteLine("Installing Security Certificiates...");
+                    SecurityExtensions.InstallCertsForChain();
+                }
+                catch
+                {
+                    Console.WriteLine("Error installing security certificates");
+                }
 
                 // Wait ?
                 // HACK: Docker doesn't wait for other services to come up
