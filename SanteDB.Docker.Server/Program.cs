@@ -13,18 +13,16 @@ using System.Threading.Tasks;
 namespace SanteDB.Docker.Server
 {
     /// <summary>
-    /// Docker host 
+    /// Docker host
     /// </summary>
-    /// <remarks>This host is minimalist implementation of a host which just starts up and 
+    /// <remarks>This host is minimalist implementation of a host which just starts up and
     /// shuts down when the docker instance is closed</remarks>
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-
             try
             {
-
 #if DEBUG
                 // Minimum services for startup
                 if (String.IsNullOrEmpty(Environment.GetEnvironmentVariable("SDB_FEATURE")))
@@ -38,9 +36,15 @@ namespace SanteDB.Docker.Server
 #endif
 
                 // Install certs
-                Console.WriteLine("Installing Security Certificiates...");
-                SecurityExtensions.InstallCertsForChain();
-
+                try
+                {
+                    Console.WriteLine("Installing Security Certificiates...");
+                    SecurityExtensions.InstallCertsForChain();
+                }
+                catch
+                {
+                    Console.WriteLine("Unable to install security certificates - are you running on Docker and as ROOT?");
+                }
                 // Wait ?
                 // HACK: Docker doesn't wait for other services to come up
                 var wait = Environment.GetEnvironmentVariable("SDB_DELAY_START");
@@ -87,16 +91,11 @@ namespace SanteDB.Docker.Server
                     // Gracefully shutdown
                     ServiceUtil.Stop();
                 }
-
-
             }
             catch (Exception e)
             {
                 Console.WriteLine("FATAL ERROR: HALTING SANTEDB HOST PROCESS : {0}", e);
-               
             }
-
         }
-
     }
 }
