@@ -5,6 +5,7 @@ using SanteDB.Docker.Core;
 using SanteDB.Server;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -17,6 +18,7 @@ namespace SanteDB.Docker.Server
     /// </summary>
     /// <remarks>This host is minimalist implementation of a host which just starts up and
     /// shuts down when the docker instance is closed</remarks>
+    [ExcludeFromCodeCoverage]
     internal class Program
     {
         private static void Main(string[] args)
