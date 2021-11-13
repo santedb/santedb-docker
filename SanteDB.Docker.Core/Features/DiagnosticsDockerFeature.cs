@@ -21,12 +21,14 @@
 using SanteDB.Core.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace SanteDB.Docker.Core.Features
 {
     /// <summary>
     /// Docker feature for diagnostics
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class DiagnosticsFeature : IDockerFeature
     {
 

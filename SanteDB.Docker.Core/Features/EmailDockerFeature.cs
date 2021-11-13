@@ -22,6 +22,7 @@ using SanteDB.Core.Configuration;
 using SanteDB.Core.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace SanteDB.Docker.Core.Features
@@ -29,6 +30,7 @@ namespace SanteDB.Docker.Core.Features
     /// <summary>
     /// E-Mail sender feature
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class EmailDockerFeature : IDockerFeature
     {
         /// <summary>
