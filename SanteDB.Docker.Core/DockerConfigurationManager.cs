@@ -25,6 +25,7 @@ using SanteDB.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -34,6 +35,7 @@ namespace SanteDB.Docker.Core
     /// <summary>
     /// A configuration manager which reads from environment variables 
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class DockerConfigurationManager : IConfigurationManager
     {
 

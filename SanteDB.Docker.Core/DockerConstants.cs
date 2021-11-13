@@ -19,11 +19,14 @@
  * Date: 2021-8-5
  */
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace SanteDB.Docker.Core
 {
     /// <summary>
     /// Constants for the docker configuration system
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public static class DockerConstants
     {
 

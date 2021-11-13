@@ -23,6 +23,7 @@ using SanteDB.Core.Security.Configuration;
 using SanteDB.Core.Security.Privacy;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace SanteDB.Docker.Core.Features
@@ -30,6 +31,7 @@ namespace SanteDB.Docker.Core.Features
     /// <summary>
     /// Privacy filtering 
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class PrivacyFilterFeature : IDockerFeature
     {
 
