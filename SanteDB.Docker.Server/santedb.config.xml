@@ -21,7 +21,7 @@
   </section>
 
   <section xsi:type="FileSystemDispatcherQueueConfigurationSection" queueRoot="./queue" />
-  <section xsi:type="ApplicationServiceContextConfigurationSection" threadPoolSize="8">
+  <section xsi:type="ApplicationServiceContextConfigurationSection">
     <serviceProviders>
 
       <!-- Core Services -->
