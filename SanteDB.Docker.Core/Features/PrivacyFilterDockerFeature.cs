@@ -25,6 +25,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace SanteDB.Docker.Core.Features
 {
@@ -35,14 +36,23 @@ namespace SanteDB.Docker.Core.Features
     public class PrivacyFilterFeature : IDockerFeature
     {
 
+        // Extract property regex
+        private Regex m_extractProperty = new Regex(@"^(\w+?)\.(?:(.*?)=)?(.*)?$");
+
         /// <summary>
         /// Resources to be protected
         /// </summary>
         public const string ResourceTypeSetting = "RESOURCE";
+        
         /// <summary>
         /// Action to take
         /// </summary>
         public const string ActionSetting = "ACTION";
+
+        /// <summary>
+        /// Action to take
+        /// </summary>
+        public const string ForbiddenPropertiesSetting = "FORBID";
 
         /// <summary>
         /// Gets the id of this feature
@@ -69,7 +79,7 @@ namespace SanteDB.Docker.Core.Features
             // Action settings
             if (settings.TryGetValue(ActionSetting, out string action))
             {
-                if (!Enum.TryParse<ResourceDataPolicyActionType>(action, true, out ResourceDataPolicyActionType actionEnum))
+                if (!Enum.TryParse(action, true, out ResourceDataPolicyActionType actionEnum))
                 {
                     throw new ArgumentOutOfRangeException($"{action} is not recognized as an action (valid: NONE, AUDIT, REDACT, NULLIFY, HIDE, ERROR, HASH)");
                 }
@@ -78,14 +88,47 @@ namespace SanteDB.Docker.Core.Features
 
             if (settings.TryGetValue(ResourceTypeSetting, out string resources))
             {
-                privacyConf.Resources = resources.Split(';').Select(o => new ResourceDataPolicyFilter()
-                {
-                    ResourceType = new ResourceTypeReferenceConfiguration()
+                privacyConf.Resources = resources.Split(';').Select(o => {
+
+                    var parts = o.Split('=');
+                    return new ResourceDataPolicyFilter()
                     {
-                        TypeXml = o
-                    },
-                    Action = privacyConf.DefaultAction
+                        ResourceType = new ResourceTypeReferenceConfiguration()
+                        {
+                            TypeXml = parts[0]
+                        },
+                        Action = parts.Length > 1 ? (ResourceDataPolicyActionType)Enum.Parse(typeof(ResourceDataPolicyActionType), parts[1], true) : privacyConf.DefaultAction
+                    };
                 }).ToList();
+            }
+
+            if(settings.TryGetValue(ForbiddenPropertiesSetting, out string forbiddenProperties))
+            {
+                forbiddenProperties.Split(';').ToList().ForEach(p =>
+                {
+                    var extract = this.m_extractProperty.Match(p);
+                    if(!extract.Success)
+                    {
+                        throw new InvalidOperationException("SDB_DATA_POLICY_FORBID muust be in format: Resource.property[=Policy OID]");
+                    }
+                    else
+                    {
+                        var resourceConfig = privacyConf.Resources.Find(o => o.ResourceType.TypeXml == extract.Groups[1].Value);
+                        if(resourceConfig == null)
+                        {
+                            resourceConfig = new ResourceDataPolicyFilter()
+                            {
+                                ResourceType = new ResourceTypeReferenceConfiguration() { TypeXml = extract.Groups[1].Value },
+                                Action = ResourceDataPolicyActionType.None
+                            };
+                        }
+
+                        /*
+                        resourceConfig.Properties 
+                        */
+
+                    }
+                });
             }
 
             // Add services
