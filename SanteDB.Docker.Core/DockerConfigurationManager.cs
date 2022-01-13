@@ -33,8 +33,17 @@ using System.Reflection;
 namespace SanteDB.Docker.Core
 {
     /// <summary>
-    /// A configuration manager which reads from environment variables 
+    /// A configuration manager which constructs a <see cref="SanteDBConfiguration"/> from environment variables
     /// </summary>
+    /// <remarks>
+    /// <para>This implementation of the <see cref="IConfigurationManager"/> uses environment variables passed from a 
+    /// <see href="https://help.santesuite.org/installation/installation/santedb-server/installation-using-appliances/docker-containers">Dockerized Installation Environment</see> so 
+    /// that SanteDB modules may operate as though they were configured from a static configuration file. </para>
+    /// <para>This class scans the <c>SDB_FEATURE</c> environment variables and locates the <see cref="IDockerFeature"/> implementation 
+    /// for the specified environment variable. It then calls the <c>Configure()</c> method on those implementations and builds
+    /// an instance of the <see cref="SanteDBConfiguration"/> object based on those providers.</para>
+    /// <para>For more information about the Docker features and their configuration see the <see href="https://help.santesuite.org/installation/installation/santedb-server/installation-using-appliances/docker-containers/feature-configuration">Docker Feature documentation</see> article</para>
+    /// </remarks>
     [ExcludeFromCodeCoverage]
     public class DockerConfigurationManager : IConfigurationManager
     {
