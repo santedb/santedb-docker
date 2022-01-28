@@ -28,7 +28,7 @@
       <add type="SanteDB.Server.Core.Services.Impl.DefaultOperatingSystemInfoService, SanteDB.Server.Core" />
       <add type="SanteDB.Server.Core.Services.Impl.DefaultPolicyEnforcementService, SanteDB.Server.Core" />
       <add type="SanteDB.Core.Jobs.DefaultJobManagerService, SanteDB.Core.Api" />
-      <add type="SanteDB.Core.Services.Impl.NetThreadPoolService, SanteDB.Core.Api" />
+      <add type="SanteDB.Core.Services.Impl.DefaultThreadPoolService, SanteDB.Core.Api" />
 
       <!-- TODO: Move this to a feature -->
       <add type="SanteDB.Core.Services.Impl.FileSystemDispatcherQueueService, SanteDB.Core.Api" />
