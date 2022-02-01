@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,6 +26,9 @@ namespace SanteDB.Docker.Server
         {
             try
             {
+
+                Console.WriteLine("SanteDB iCDR Server for Docker and Kubernetes v.{0} ({1})", typeof(Program).Assembly.GetName().Version, typeof(Program).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion);
+                Console.WriteLine("{0}", typeof(Program).Assembly.GetCustomAttribute<AssemblyCopyrightAttribute>().Copyright);
 #if DEBUG
                 // Minimum services for startup
                 if (String.IsNullOrEmpty(Environment.GetEnvironmentVariable("SDB_FEATURE")))
