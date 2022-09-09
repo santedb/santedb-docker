@@ -164,10 +164,6 @@
           <Project>{976e1627-b0da-4237-977d-9b3020b60dc1}</Project>
           <Name>SanteDB.Messaging.Atna</Name>
         </ProjectReference>
-        <ProjectReference Include="..\..\SanteDB.Messaging.HDSI\SanteDB.Messaging.HDSI.csproj">
-          <Project>{04e3c581-5a04-4691-82ac-f339947fce75}</Project>
-          <Name>SanteDB.Messaging.HDSI</Name>
-        </ProjectReference>
         <ProjectReference Include="..\..\SanteDB.Persistence.Auditing.ADO\SanteDB.Persistence.Auditing.ADO.csproj">
           <Project>{45ea67a6-48f6-4906-84ec-5c13c80c9cc4}</Project>
           <Name>SanteDB.Persistence.Auditing.ADO</Name>
