@@ -26,10 +26,10 @@
   <section xsi:type="DiagnosticsConfigurationSection">
     <writers>
       <add name="main" initializationData="/var/log/santedb.log" filter="Warning">
-        <writer>SanteDB.Server.Core.Diagnostics.RolloverTextWriterTraceWriter, SanteDB.Server.Core</writer>
+        <writer type="SanteDB.Core.Diagnostics.RolloverTextWriterTraceWriter, SanteDB.Core.Api"></writer>
       </add>
       <add name="console" initializationData="stdout" filter="Informational">
-        <writer>SanteDB.Server.Core.Diagnostics.ConsoleTraceWriter, SanteDB.Server.Core</writer>
+        <writer type="SanteDB.Core.Diagnostics.ConsoleTraceWriter, SanteDB.Core.Api"/>
       </add>
     </writers>
   </section>
