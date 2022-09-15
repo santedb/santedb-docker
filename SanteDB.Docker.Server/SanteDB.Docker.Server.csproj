@@ -156,10 +156,6 @@
           <Project>{903e2e75-7b62-4c42-a001-404dc0235a6b}</Project>
           <Name>SanteDB.Rest.HDSI</Name>
         </ProjectReference>
-        <ProjectReference Include="..\..\SanteDB.Messaging.AMI\SanteDB.Messaging.AMI.csproj">
-          <Project>{d882323c-2bc9-4a1d-b70f-d833cf2e91a1}</Project>
-          <Name>SanteDB.Messaging.AMI</Name>
-        </ProjectReference>
         <ProjectReference Include="..\..\SanteDB.Messaging.Atna\SanteDB.Messaging.Atna.csproj">
           <Project>{976e1627-b0da-4237-977d-9b3020b60dc1}</Project>
           <Name>SanteDB.Messaging.Atna</Name>
