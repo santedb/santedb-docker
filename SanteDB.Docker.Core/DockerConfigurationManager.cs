@@ -52,14 +52,6 @@ namespace SanteDB.Docker.Core
         private SanteDBConfiguration m_configuration;
 
         /// <summary>
-        /// Create new file confiugration service.
-        /// </summary>
-        public DockerConfigurationManager() : this(String.Empty)
-        {
-
-        }
-
-        /// <summary>
         /// Get configuration service
         /// </summary>
         public DockerConfigurationManager(string configFile)

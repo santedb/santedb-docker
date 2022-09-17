@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DockerServerContext.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -75,10 +76,6 @@
         <ProjectReference Include="..\..\santedb-api\SanteDB.Core.Api\SanteDB.Core.Api.csproj">
           <Project>{3A45F695-47A2-464C-ACE6-BDABBFA39FBC}</Project>
           <Name>SanteDB.Core.Api</Name>
-        </ProjectReference>
-        <ProjectReference Include="..\..\SanteDB.Server\SanteDB.Server.csproj">
-          <Project>{1D145E2A-C31E-467C-9F4A-6811E1604B67}</Project>
-          <Name>SanteDB.Server</Name>
         </ProjectReference>
         <ProjectReference Include="..\..\santedb-applets\SanteDB.Core.Applets\SanteDB.Core.Applets.csproj">
           <Project>{39e61451-f4fe-493d-b754-5f06eb284aac}</Project>

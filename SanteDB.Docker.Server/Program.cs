@@ -19,10 +19,10 @@
  * Date: 2022-5-30
  */
 using Mono.Unix;
+using SanteDB.Core;
 using SanteDB.Core.Security;
 using SanteDB.Core.Services;
 using SanteDB.Docker.Core;
-using SanteDB.Server;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -82,13 +82,9 @@ namespace SanteDB.Docker.Server
                 }
                 IConfigurationManager configurationManager = null;
 
-                if (args?.Length == 1) // User passed an alternate configuration file
-                    configurationManager = new DockerConfigurationManager(args[0]);
-                else
-                    configurationManager = new DockerConfigurationManager();
-
+                
                 // Start the host process
-                ServiceUtil.Start(Guid.NewGuid(), configurationManager);
+                ServiceUtil.Start(Guid.NewGuid(), new DockerServerContext(args[0]));
 
                 Console.WriteLine("Service startup completed...");
                 if (Environment.OSVersion.Platform == PlatformID.Win32NT)
