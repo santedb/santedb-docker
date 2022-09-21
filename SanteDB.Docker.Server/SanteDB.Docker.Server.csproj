@@ -157,14 +157,6 @@
           <Project>{976e1627-b0da-4237-977d-9b3020b60dc1}</Project>
           <Name>SanteDB.Messaging.Atna</Name>
         </ProjectReference>
-        <ProjectReference Include="..\..\SanteDB.Persistence.Auditing.ADO\SanteDB.Persistence.Auditing.ADO.csproj">
-          <Project>{45ea67a6-48f6-4906-84ec-5c13c80c9cc4}</Project>
-          <Name>SanteDB.Persistence.Auditing.ADO</Name>
-        </ProjectReference>
-        <ProjectReference Include="..\..\SanteDB.Persistence.PubSub.ADO\SanteDB.Persistence.PubSub.ADO.csproj">
-          <Project>{03052730-be5d-4212-9b71-316c685dd245}</Project>
-          <Name>SanteDB.Persistence.PubSub.ADO</Name>
-        </ProjectReference>
         <ProjectReference Include="..\..\SanteDB.Authentication.OAuth\SanteDB.Authentication.OAuth2.csproj">
           <Project>{a3975c6f-4fdb-43be-81ab-3357b86173f1}</Project>
           <Name>SanteDB.Authentication.OAuth2</Name>
