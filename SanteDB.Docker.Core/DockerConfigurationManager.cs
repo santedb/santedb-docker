@@ -59,16 +59,24 @@ namespace SanteDB.Docker.Core
             try
             {
                 if (String.IsNullOrEmpty(configFile))
+                {
                     configFile = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "santedb.config.xml");
+                }
                 else if (!Path.IsPathRooted(configFile))
+                {
                     configFile = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), configFile);
+                }
 
                 using (var s = File.OpenRead(configFile))
+                {
                     this.m_configuration = SanteDBConfiguration.Load(s);
+                }
 
                 var enabledFeatures = Environment.GetEnvironmentVariable(DockerConstants.EnvFeatureList)?.Split(';');
                 if (enabledFeatures == null || enabledFeatures.Length == 0)
+                {
                     throw new InvalidOperationException($"No features configured - use {DockerConstants.EnvFeatureList}");
+                }
 
                 IDictionary<String, IDockerFeature> features = new Dictionary<String, IDockerFeature>();
 
@@ -141,7 +149,10 @@ namespace SanteDB.Docker.Core
         {
             var retVal = Environment.GetEnvironmentVariable(key);
             if (String.IsNullOrEmpty(retVal))
+            {
                 retVal = this.m_configuration.GetSection<ApplicationServiceContextConfigurationSection>().AppSettings.Find(o => o.Key == key)?.Value;
+            }
+
             return retVal;
         }
 
@@ -152,18 +163,26 @@ namespace SanteDB.Docker.Core
         {
             var retVal = Environment.GetEnvironmentVariable($"{DockerConstants.EnvConnectionStringPrefix}{key.ToUpper()}");
             if (String.IsNullOrEmpty(retVal))
+            {
                 return this.m_configuration.GetSection<DataConfigurationSection>().ConnectionString.Find(o => o.Name == key);
+            }
             else
             {
                 var provider = Environment.GetEnvironmentVariable($"{DockerConstants.EnvConnectionStringPrefix}{key.ToUpper()}_PROVIDER");
 
                 if (String.IsNullOrEmpty(provider))
+                {
                     Environment.GetEnvironmentVariable($"{DockerConstants.EnvConnectionStringPrefix}_PROVIDER");
+                }
 
                 if (!String.IsNullOrEmpty(provider))
+                {
                     return new ConnectionString(provider.ToString(), retVal);
+                }
                 else
+                {
                     throw new ConfigurationException($"No provider configurated for {key}", this.m_configuration);
+                }
             }
         }
 

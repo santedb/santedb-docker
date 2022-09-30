@@ -21,16 +21,10 @@
 using Mono.Unix;
 using SanteDB.Core;
 using SanteDB.Core.Security;
-using SanteDB.Core.Services;
-using SanteDB.Docker.Core;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace SanteDB.Docker.Server
 {
@@ -80,9 +74,8 @@ namespace SanteDB.Docker.Server
                     Thread.Sleep(waitInt);
                     Console.WriteLine("Continuing startup...");
                 }
-                IConfigurationManager configurationManager = null;
 
-                
+
                 // Start the host process
                 ServiceUtil.Start(Guid.NewGuid(), new DockerServerContext(args[0]));
 
