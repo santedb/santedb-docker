@@ -142,6 +142,9 @@ namespace SanteDB.Docker.Core
         /// </summary>
         public string ServiceName => "Docker Configuration Manager";
 
+        /// <inheritdoc/>
+        public bool IsReadonly => true;
+
         /// <summary>
         /// Get an application setting
         /// </summary>
@@ -199,7 +202,14 @@ namespace SanteDB.Docker.Core
         /// </summary>
         public void Reload()
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
+        }
+
+        /// <inheritdoc/>
+        /// <exception cref="NotSupportedException"></exception>
+        public void SaveConfiguration()
+        {
+            throw new NotSupportedException();
         }
 
         /// <summary>
