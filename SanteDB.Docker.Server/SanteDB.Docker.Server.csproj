@@ -13,7 +13,6 @@
       <PropertyGroup>
         <VersionNumberInfo>$(VersionNumber)</VersionNumberInfo>
       </PropertyGroup>
-
     </Otherwise>
   </Choose>
   <ItemGroup>
@@ -170,10 +169,6 @@
         <ProjectReference Include="..\..\SanteDB.Messaging.Atna\SanteDB.Messaging.Atna.csproj">
           <Project>{976e1627-b0da-4237-977d-9b3020b60dc1}</Project>
           <Name>SanteDB.Messaging.Atna</Name>
-        </ProjectReference>
-        <ProjectReference Include="..\..\SanteDB.Authentication.OAuth\SanteDB.Authentication.OAuth2.csproj">
-          <Project>{a3975c6f-4fdb-43be-81ab-3357b86173f1}</Project>
-          <Name>SanteDB.Authentication.OAuth2</Name>
         </ProjectReference>
         <ProjectReference Include="..\..\SanteDB\SanteDB.csproj">
           <Project>{649b7c70-ec21-4ac4-b918-c34c84753126}</Project>
