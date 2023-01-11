@@ -181,10 +181,7 @@
         <PackageReference Include="SanteDB.Messaging.Atna">
           <Version>$(VersionNumber)</Version>
         </PackageReference>
-        <PackageReference Include="SanteDB.Server">
-          <Version>$(VersionNumber)</Version>
-        </PackageReference>
-        <PackageReference Include="SanteDB.Server.Plugin">
+        <PackageReference Include="SanteDB.iCDR.Runtime">
           <Version>$(VersionNumber)</Version>
         </PackageReference>
       </ItemGroup>
