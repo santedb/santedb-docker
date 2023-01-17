@@ -89,7 +89,7 @@ namespace SanteDB.Docker.Core
                         if (rfoAsm.GetExportedTypes().Any(t => t.GetInterface(typeof(IDockerFeature).FullName) != null))
                         {
                             var fAsm = Assembly.LoadFrom(f);
-                            foreach (var feature in fAsm.ExportedTypes
+                            foreach (var feature in fAsm.GetExportedTypesSafe()
                                 .Where(t => typeof(IDockerFeature).IsAssignableFrom(t) && !t.IsAbstract && !t.IsInterface)
                                 .Select(t => Activator.CreateInstance(t) as IDockerFeature))
                             {
