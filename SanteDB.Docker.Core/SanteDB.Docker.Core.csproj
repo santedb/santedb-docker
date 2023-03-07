@@ -1,13 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 <PropertyGroup Condition="'$(VersionNumber)' == ''">
-    <VersionNumber>2.1.0-debug</VersionNumber>
+    <VersionNumber>3.0-debug</VersionNumber>
   </PropertyGroup>
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>$(VersionNumber)</Version>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageId>SanteDB.Docker.Core</PackageId>
+    <Title>SanteDB.Docker.Core</Title>
+    <Version>$(VersionNumber)</Version>
+    <Description>SanteDB support for Dockerization and configuration via environment variables</Description>
+    <Authors>SanteSuite Contributors</Authors>
+    <PackageTags>SanteDB</PackageTags>
+    <RepositoryUrl>https://github.com/santedb/santedb-docker</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <IncludeSymbols>true</IncludeSymbols>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Product>SanteDB</Product>
+    <Copyright>Copyright (C) 2015-2022 SanteSuite Contributors (See: NOTICES)</Copyright>
+    <Company>SanteSuite Contributors</Company>
+    <PackageIconUrl>http://santesuite.org/assets/img/logo.png</PackageIconUrl>
+    <PackageProjectUrl>http://santesuite.org</PackageProjectUrl>
+    <AssemblyName>SanteDB.Docker.Core</AssemblyName>
+  </PropertyGroup>
   <ItemGroup>
     <None Remove="Features\Config\DiagnosticsFeature.xml" />
   </ItemGroup>

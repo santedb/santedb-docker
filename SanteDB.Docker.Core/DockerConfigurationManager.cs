@@ -16,7 +16,7 @@
  * the License.
  * 
  * User: fyfej
- * Date: 2021-9-7
+ * Date: 2022-5-30
  */
 using SanteDB.Core.Configuration;
 using SanteDB.Core.Configuration.Data;
@@ -52,14 +52,6 @@ namespace SanteDB.Docker.Core
         private SanteDBConfiguration m_configuration;
 
         /// <summary>
-        /// Create new file confiugration service.
-        /// </summary>
-        public DockerConfigurationManager() : this(String.Empty)
-        {
-
-        }
-
-        /// <summary>
         /// Get configuration service
         /// </summary>
         public DockerConfigurationManager(string configFile)
@@ -67,16 +59,24 @@ namespace SanteDB.Docker.Core
             try
             {
                 if (String.IsNullOrEmpty(configFile))
+                {
                     configFile = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "santedb.config.xml");
+                }
                 else if (!Path.IsPathRooted(configFile))
+                {
                     configFile = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), configFile);
+                }
 
                 using (var s = File.OpenRead(configFile))
+                {
                     this.m_configuration = SanteDBConfiguration.Load(s);
+                }
 
                 var enabledFeatures = Environment.GetEnvironmentVariable(DockerConstants.EnvFeatureList)?.Split(';');
                 if (enabledFeatures == null || enabledFeatures.Length == 0)
+                {
                     throw new InvalidOperationException($"No features configured - use {DockerConstants.EnvFeatureList}");
+                }
 
                 IDictionary<String, IDockerFeature> features = new Dictionary<String, IDockerFeature>();
 
@@ -89,7 +89,7 @@ namespace SanteDB.Docker.Core
                         if (rfoAsm.GetExportedTypes().Any(t => t.GetInterface(typeof(IDockerFeature).FullName) != null))
                         {
                             var fAsm = Assembly.LoadFrom(f);
-                            foreach (var feature in fAsm.ExportedTypes
+                            foreach (var feature in fAsm.GetExportedTypesSafe()
                                 .Where(t => typeof(IDockerFeature).IsAssignableFrom(t) && !t.IsAbstract && !t.IsInterface)
                                 .Select(t => Activator.CreateInstance(t) as IDockerFeature))
                             {
@@ -142,6 +142,9 @@ namespace SanteDB.Docker.Core
         /// </summary>
         public string ServiceName => "Docker Configuration Manager";
 
+        /// <inheritdoc/>
+        public bool IsReadonly => true;
+
         /// <summary>
         /// Get an application setting
         /// </summary>
@@ -149,7 +152,10 @@ namespace SanteDB.Docker.Core
         {
             var retVal = Environment.GetEnvironmentVariable(key);
             if (String.IsNullOrEmpty(retVal))
+            {
                 retVal = this.m_configuration.GetSection<ApplicationServiceContextConfigurationSection>().AppSettings.Find(o => o.Key == key)?.Value;
+            }
+
             return retVal;
         }
 
@@ -160,18 +166,26 @@ namespace SanteDB.Docker.Core
         {
             var retVal = Environment.GetEnvironmentVariable($"{DockerConstants.EnvConnectionStringPrefix}{key.ToUpper()}");
             if (String.IsNullOrEmpty(retVal))
+            {
                 return this.m_configuration.GetSection<DataConfigurationSection>().ConnectionString.Find(o => o.Name == key);
+            }
             else
             {
                 var provider = Environment.GetEnvironmentVariable($"{DockerConstants.EnvConnectionStringPrefix}{key.ToUpper()}_PROVIDER");
 
                 if (String.IsNullOrEmpty(provider))
+                {
                     Environment.GetEnvironmentVariable($"{DockerConstants.EnvConnectionStringPrefix}_PROVIDER");
+                }
 
                 if (!String.IsNullOrEmpty(provider))
+                {
                     return new ConnectionString(provider.ToString(), retVal);
+                }
                 else
+                {
                     throw new ConfigurationException($"No provider configurated for {key}", this.m_configuration);
+                }
             }
         }
 
@@ -188,7 +202,14 @@ namespace SanteDB.Docker.Core
         /// </summary>
         public void Reload()
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
+        }
+
+        /// <inheritdoc/>
+        /// <exception cref="NotSupportedException"></exception>
+        public void SaveConfiguration()
+        {
+            throw new NotSupportedException();
         }
 
         /// <summary>

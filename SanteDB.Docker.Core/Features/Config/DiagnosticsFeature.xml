@@ -16,7 +16,7 @@
  - the License.
  - 
  - User: fyfej
- - Date: 2021-9-7
+ - Date: 2022-5-30
  -->
 <SanteDBConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://santedb.org/configuration">
   <sections>
@@ -26,10 +26,10 @@
   <section xsi:type="DiagnosticsConfigurationSection">
     <writers>
       <add name="main" initializationData="/var/log/santedb.log" filter="Warning">
-        <writer>SanteDB.Server.Core.Diagnostics.RolloverTextWriterTraceWriter, SanteDB.Server.Core</writer>
+        <writer type="SanteDB.Core.Diagnostics.RolloverTextWriterTraceWriter, SanteDB.Core.Api"></writer>
       </add>
       <add name="console" initializationData="stdout" filter="Informational">
-        <writer>SanteDB.Server.Core.Diagnostics.ConsoleTraceWriter, SanteDB.Server.Core</writer>
+        <writer type="SanteDB.Core.Diagnostics.ConsoleTraceWriter, SanteDB.Core.Api"/>
       </add>
     </writers>
   </section>

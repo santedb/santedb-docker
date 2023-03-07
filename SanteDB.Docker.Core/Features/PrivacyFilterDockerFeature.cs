@@ -16,7 +16,7 @@
  * the License.
  * 
  * User: fyfej
- * Date: 2021-9-7
+ * Date: 2022-5-30
  */
 using SanteDB.Core.Configuration;
 using SanteDB.Core.Security.Configuration;
@@ -43,7 +43,7 @@ namespace SanteDB.Docker.Core.Features
         /// Resources to be protected
         /// </summary>
         public const string ResourceTypeSetting = "RESOURCE";
-        
+
         /// <summary>
         /// Action to take
         /// </summary>
@@ -88,7 +88,8 @@ namespace SanteDB.Docker.Core.Features
 
             if (settings.TryGetValue(ResourceTypeSetting, out string resources))
             {
-                privacyConf.Resources = resources.Split(';').Select(o => {
+                privacyConf.Resources = resources.Split(';').Select(o =>
+                {
 
                     var parts = o.Split('=');
                     return new ResourceDataPolicyFilter()
@@ -102,19 +103,19 @@ namespace SanteDB.Docker.Core.Features
                 }).ToList();
             }
 
-            if(settings.TryGetValue(ForbiddenPropertiesSetting, out string forbiddenProperties))
+            if (settings.TryGetValue(ForbiddenPropertiesSetting, out string forbiddenProperties))
             {
                 forbiddenProperties.Split(';').ToList().ForEach(p =>
                 {
                     var extract = this.m_extractProperty.Match(p);
-                    if(!extract.Success)
+                    if (!extract.Success)
                     {
                         throw new InvalidOperationException("SDB_DATA_POLICY_FORBID muust be in format: Resource.property[=Policy OID]");
                     }
                     else
                     {
                         var resourceConfig = privacyConf.Resources.Find(o => o.ResourceType.TypeXml == extract.Groups[1].Value);
-                        if(resourceConfig == null)
+                        if (resourceConfig == null)
                         {
                             resourceConfig = new ResourceDataPolicyFilter()
                             {

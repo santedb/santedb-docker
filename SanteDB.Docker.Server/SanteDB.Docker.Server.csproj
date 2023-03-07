@@ -1,8 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(VersionNumber)' == ''">
-    <VersionNumber>2.1.0-debug</VersionNumber>
+    <VersionNumber>3.0-debug</VersionNumber>
   </PropertyGroup>
+  <Choose>
+    <When Condition="$(VersionNumber.Contains('-'))">
+      <PropertyGroup>
+        <VersionNumberInfo>$(VersionNumber.Substring(0, $(VersionNumber.IndexOf('-'))))</VersionNumberInfo>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <VersionNumberInfo>$(VersionNumber)</VersionNumberInfo>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
   <ItemGroup>
     <PackageReference Include="MSBuildTasks" Version="1.5.0.235">
       <PrivateAssets>all</PrivateAssets>
@@ -17,10 +29,11 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>SanteDB.Docker.Server</RootNamespace>
     <AssemblyName>SanteDB.Docker.Server</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -52,10 +65,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DockerServerContext.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\SanteDB.licenseheader">
+      <Link>SanteDB.licenseheader</Link>
+    </None>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
@@ -73,10 +90,6 @@
           <Project>{3A45F695-47A2-464C-ACE6-BDABBFA39FBC}</Project>
           <Name>SanteDB.Core.Api</Name>
         </ProjectReference>
-        <ProjectReference Include="..\..\SanteDB.Server\SanteDB.Server.csproj">
-          <Project>{1D145E2A-C31E-467C-9F4A-6811E1604B67}</Project>
-          <Name>SanteDB.Server</Name>
-        </ProjectReference>
         <ProjectReference Include="..\..\santedb-applets\SanteDB.Core.Applets\SanteDB.Core.Applets.csproj">
           <Project>{39e61451-f4fe-493d-b754-5f06eb284aac}</Project>
           <Name>SanteDB.Core.Applets</Name>
@@ -92,14 +105,6 @@
         <ProjectReference Include="..\..\santedb-bre-js\SanteDB.BusinessRules.JavaScript\SanteDB.BusinessRules.JavaScript.csproj">
           <Project>{3bfd6ee6-0267-4d82-be7d-9b48b2f6f3d4}</Project>
           <Name>SanteDB.BusinessRules.JavaScript</Name>
-        </ProjectReference>
-        <ProjectReference Include="..\..\santedb-cache-memory\SanteDB.Caching.Memory\SanteDB.Caching.Memory.csproj">
-          <Project>{8553abc7-abfa-4a21-b0e8-68b7de76129d}</Project>
-          <Name>SanteDB.Caching.Memory</Name>
-        </ProjectReference>
-        <ProjectReference Include="..\..\santedb-cache-redis\SanteDB.Caching.Redis\SanteDB.Caching.Redis.csproj">
-          <Project>{86672094-25cc-4cd5-b085-240e50ec4a5e}</Project>
-          <Name>SanteDB.Caching.Redis</Name>
         </ProjectReference>
         <ProjectReference Include="..\..\santedb-cdss\SanteDB.Cdss.Xml\SanteDB.Cdss.Xml.csproj">
           <Project>{cad6bcb7-758b-4aa4-a5fe-a9fab8a4cf2f}</Project>
@@ -161,33 +166,9 @@
           <Project>{903e2e75-7b62-4c42-a001-404dc0235a6b}</Project>
           <Name>SanteDB.Rest.HDSI</Name>
         </ProjectReference>
-        <ProjectReference Include="..\..\SanteDB.Messaging.AMI\SanteDB.Messaging.AMI.csproj">
-          <Project>{d882323c-2bc9-4a1d-b70f-d833cf2e91a1}</Project>
-          <Name>SanteDB.Messaging.AMI</Name>
-        </ProjectReference>
         <ProjectReference Include="..\..\SanteDB.Messaging.Atna\SanteDB.Messaging.Atna.csproj">
           <Project>{976e1627-b0da-4237-977d-9b3020b60dc1}</Project>
           <Name>SanteDB.Messaging.Atna</Name>
-        </ProjectReference>
-        <ProjectReference Include="..\..\SanteDB.Messaging.HDSI\SanteDB.Messaging.HDSI.csproj">
-          <Project>{04e3c581-5a04-4691-82ac-f339947fce75}</Project>
-          <Name>SanteDB.Messaging.HDSI</Name>
-        </ProjectReference>
-        <ProjectReference Include="..\..\SanteDB.Persistence.Auditing.ADO\SanteDB.Persistence.Auditing.ADO.csproj">
-          <Project>{45ea67a6-48f6-4906-84ec-5c13c80c9cc4}</Project>
-          <Name>SanteDB.Persistence.Auditing.ADO</Name>
-        </ProjectReference>
-        <ProjectReference Include="..\..\SanteDB.Persistence.Data.ADO\SanteDB.Persistence.Data.ADO.csproj">
-          <Project>{f38ed54c-e4e4-499a-882e-736289f332c0}</Project>
-          <Name>SanteDB.Persistence.Data.ADO</Name>
-        </ProjectReference>
-        <ProjectReference Include="..\..\SanteDB.Persistence.PubSub.ADO\SanteDB.Persistence.PubSub.ADO.csproj">
-          <Project>{03052730-be5d-4212-9b71-316c685dd245}</Project>
-          <Name>SanteDB.Persistence.PubSub.ADO</Name>
-        </ProjectReference>
-        <ProjectReference Include="..\..\SanteDB.Authentication.OAuth\SanteDB.Authentication.OAuth2.csproj">
-          <Project>{a3975c6f-4fdb-43be-81ab-3357b86173f1}</Project>
-          <Name>SanteDB.Authentication.OAuth2</Name>
         </ProjectReference>
         <ProjectReference Include="..\..\SanteDB\SanteDB.csproj">
           <Project>{649b7c70-ec21-4ac4-b918-c34c84753126}</Project>
@@ -200,10 +181,7 @@
         <PackageReference Include="SanteDB.Messaging.Atna">
           <Version>$(VersionNumber)</Version>
         </PackageReference>
-        <PackageReference Include="SanteDB.Server">
-          <Version>$(VersionNumber)</Version>
-        </PackageReference>
-        <PackageReference Include="SanteDB.Server.Plugin">
+        <PackageReference Include="SanteDB.iCDR.Runtime">
           <Version>$(VersionNumber)</Version>
         </PackageReference>
       </ItemGroup>
@@ -237,7 +215,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="BeforeBuild" Condition="!$(VersionNumber.EndsWith('-debug'))">
-    <AssemblyInfo CodeLanguage="CS" OutputFile="$(MSBuildProjectDirectory)\Properties\Version.cs" AssemblyVersion="$(VersionNumber)" AssemblyFileVersion="$(VersionNumber)" />
+    <AssemblyInfo CodeLanguage="CS" OutputFile="$(MSBuildProjectDirectory)\Properties\Version.cs" AssemblyVersion="$(VersionNumberInfo)" AssemblyFileVersion="$(VersionNumberInfo)" />
   </Target>
   <ItemGroup>
     <Compile Include="Properties\Version.cs" />
