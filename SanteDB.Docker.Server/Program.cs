@@ -75,6 +75,10 @@ namespace SanteDB.Docker.Server
                     Console.WriteLine("Continuing startup...");
                 }
 
+                if(args.Length == 0)
+                {
+                    args[0] = String.Empty;
+                }
 
                 // Start the host process
                 ServiceUtil.Start(Guid.NewGuid(), new DockerServerContext(args[0]));
