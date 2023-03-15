@@ -77,7 +77,7 @@ namespace SanteDB.Docker.Server
 
                 if(args.Length == 0)
                 {
-                    args[0] = String.Empty;
+                    args = new string[] { String.Empty };
                 }
 
                 // Start the host process
