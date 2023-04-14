@@ -21,8 +21,10 @@
 using SanteDB.Core.Configuration;
 using SanteDB.Core.Configuration.Data;
 using SanteDB.Core.Exceptions;
+using SanteDB.Core.i18n;
 using SanteDB.Core.Services;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -50,6 +52,7 @@ namespace SanteDB.Docker.Core
 
         // The configuration
         private SanteDBConfiguration m_configuration;
+        private readonly ConcurrentDictionary<String, ConnectionString> m_transientConnectionStrings = new ConcurrentDictionary<string, ConnectionString>();
 
         /// <summary>
         /// Get configuration service
@@ -164,10 +167,15 @@ namespace SanteDB.Docker.Core
         /// </summary>
         public ConnectionString GetConnectionString(string key)
         {
-            var retVal = Environment.GetEnvironmentVariable($"{DockerConstants.EnvConnectionStringPrefix}{key.ToUpper()}");
-            if (String.IsNullOrEmpty(retVal))
+            var envVar = Environment.GetEnvironmentVariable($"{DockerConstants.EnvConnectionStringPrefix}{key.ToUpper().Replace(".", "_")}");
+            if (String.IsNullOrEmpty(envVar))
             {
-                return this.m_configuration.GetSection<DataConfigurationSection>().ConnectionString.Find(o => o.Name == key);
+                var retVal = this.m_configuration.GetSection<DataConfigurationSection>().ConnectionString.Find(o => o.Name == key);
+                if (retVal == null)
+                {
+                    this.m_transientConnectionStrings.TryGetValue(key, out retVal);
+                }
+                return retVal;
             }
             else
             {
@@ -180,7 +188,7 @@ namespace SanteDB.Docker.Core
 
                 if (!String.IsNullOrEmpty(provider))
                 {
-                    return new ConnectionString(provider.ToString(), retVal);
+                    return new ConnectionString(provider.ToString(), envVar);
                 }
                 else
                 {
@@ -219,5 +227,16 @@ namespace SanteDB.Docker.Core
         {
             Environment.SetEnvironmentVariable(key, value);
         }
+
+        /// <inheritdoc/>
+        public void SetTransientConnectionString(string key, ConnectionString connectionString)
+        {
+            if (Configuration.GetSection<DataConfigurationSection>()?.ConnectionString.Any(o => o.Name == key) == true)
+            {
+                throw new InvalidOperationException(String.Format(ErrorMessages.DUPLICATE_OBJECT, key));
+            }
+            this.m_transientConnectionStrings.AddOrUpdate(key, connectionString, (k, o) => o);
+        }
+
     }
 }
