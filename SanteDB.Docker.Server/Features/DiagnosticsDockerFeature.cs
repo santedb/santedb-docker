@@ -19,6 +19,7 @@
  * Date: 2023-3-10
  */
 using SanteDB.Core.Configuration;
+using SanteDB.Core.Diagnostics.Tracing;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -53,7 +54,26 @@ namespace SanteDB.Docker.Core.Features
             var dxConfig = configuration.GetSection<DiagnosticsConfigurationSection>();
             if (dxConfig == null)
             {
-                dxConfig = DockerFeatureUtils.LoadConfigurationResource<DiagnosticsConfigurationSection>("SanteDB.Docker.Core.Features.Config.DiagnosticsFeature.xml");
+                dxConfig = new DiagnosticsConfigurationSection()
+                {
+                    TraceWriter = new List<TraceWriterConfiguration>()
+                    {
+                        new TraceWriterConfiguration()
+                        {
+                            Filter = System.Diagnostics.Tracing.EventLevel.Warning,
+                            InitializationData = "/var/log/santedb.log",
+                            WriterName = "main",
+                            TraceWriterClassXml = new TypeReferenceConfiguration(typeof(RolloverTextWriterTraceWriter))
+                        },
+                        new TraceWriterConfiguration()
+                        {
+                            Filter = System.Diagnostics.Tracing.EventLevel.Informational,
+                            InitializationData = "stdout",
+                            WriterName = "console",
+                            TraceWriterClassXml = new TypeReferenceConfiguration(typeof(ConsoleTraceWriter))
+                        }
+                    }
+                };
                 configuration.AddSection(dxConfig);
             }
 

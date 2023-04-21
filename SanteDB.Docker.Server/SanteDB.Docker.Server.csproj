@@ -66,6 +66,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DockerServerContext.cs" />
+    <Compile Include="Features\DiagnosticsDockerFeature.cs" />
+    <Compile Include="Features\EmailDockerFeature.cs" />
+    <Compile Include="Features\PrivacyFilterDockerFeature.cs" />
+    <Compile Include="Features\SecurityDockerFeature.cs" />
+    <Compile Include="Features\SigningDockerFeature.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -188,6 +193,46 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <ProjectReference Include="..\..\santedb-cache-memory\SanteDB.Caching.Memory\SanteDB.Caching.Memory.csproj">
+      <Project>{8553abc7-abfa-4a21-b0e8-68b7de76129d}</Project>
+      <Name>SanteDB.Caching.Memory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\santedb-cache-redis\SanteDB.Caching.Redis\SanteDB.Caching.Redis.csproj">
+      <Project>{86672094-25cc-4cd5-b085-240e50ec4a5e}</Project>
+      <Name>SanteDB.Caching.Redis</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\santedb-certs-bc\SanteDB.Security.Certs.BouncyCastle\SanteDB.Security.Certs.BouncyCastle.csproj">
+      <Project>{c4f21107-e045-4d8e-bdb3-be67ede5dd5b}</Project>
+      <Name>SanteDB.Security.Certs.BouncyCastle</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\santedb-data\SanteDB.Persistence.Auditing.ADO\SanteDB.Persistence.Auditing.ADO.csproj">
+      <Project>{45ea67a6-48f6-4906-84ec-5c13c80c9cc4}</Project>
+      <Name>SanteDB.Persistence.Auditing.ADO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\santedb-data\SanteDB.Persistence.Data\SanteDB.Persistence.Data.csproj">
+      <Project>{81bd479f-5dbc-42e9-96c2-40380aac36bc}</Project>
+      <Name>SanteDB.Persistence.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\santedb-data\SanteDB.Persistence.PubSub.ADO\SanteDB.Persistence.PubSub.ADO.csproj">
+      <Project>{b727f549-3b5d-4094-bdfb-55f15756d2d6}</Project>
+      <Name>SanteDB.Persistence.PubSub.ADO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\santedb-i18n\SanteDB.Core.i18n\SanteDB.Core.i18n.csproj">
+      <Project>{ca7b81dc-b789-4af6-a079-ec84259c101a}</Project>
+      <Name>SanteDB.Core.i18n</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\santedb-rabbitmq\SanteDB.Queue.RabbitMq\SanteDB.Queue.RabbitMq.csproj">
+      <Project>{4696ce1f-1f0a-4125-98f8-5a2ecb735065}</Project>
+      <Name>SanteDB.Queue.RabbitMq</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\santedb-restsvc\SanteDB.Rest.OAuth\SanteDB.Rest.OAuth.csproj">
+      <Project>{1e96cd40-c238-44c9-a7e7-72c49e15c8fa}</Project>
+      <Name>SanteDB.Rest.OAuth</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\santedb-restsvc\SanteDB.Rest.WWW\SanteDB.Rest.WWW.csproj">
+      <Project>{09b39a55-466f-4678-a644-fdada2ac5b6a}</Project>
+      <Name>SanteDB.Rest.WWW</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SanteDB.Docker.Core\SanteDB.Docker.Core.csproj">
       <Project>{26085d74-f021-442e-a75e-85654afbfc13}</Project>
       <Name>SanteDB.Docker.Core</Name>
@@ -206,6 +251,7 @@
     <Content Include="config\santedb.rest.config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="Features\Config\DiagnosticsFeature.xml" />
     <Content Include="santedb.config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

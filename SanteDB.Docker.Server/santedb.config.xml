@@ -24,7 +24,7 @@
     <add type="SanteDB.OrmLite.Configuration.OrmConfigurationSection, SanteDB.OrmLite" />
     <add type="SanteDB.Core.Configuration.Data.DataConfigurationSection, SanteDB.Core.Api" />
     <add type="SanteDB.Core.Configuration.ApplicationServiceContextConfigurationSection, SanteDB.Core.Api" />
-    <add type="SanteDB.Core.Configuration.FileSystemQueueConfigurationSection, SanteDB.Core.Api" />
+    <add type="SanteDB.Core.Configuration.FileSystemDispatcherQueueConfigurationSection, SanteDB.Core.Api" />
   </sections>
   <include>config/santedb.audit_accountability.config.xml</include>
   <include>config/santedb.rest.config.xml</include>

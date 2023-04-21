@@ -28,13 +28,6 @@
     <PackageProjectUrl>http://santesuite.org</PackageProjectUrl>
     <AssemblyName>SanteDB.Docker.Core</AssemblyName>
   </PropertyGroup>
-  <ItemGroup>
-    <None Remove="Features\Config\DiagnosticsFeature.xml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Features\Config\DiagnosticsFeature.xml" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\SanteDB.licenseheader" Link="SanteDB.licenseheader" />
