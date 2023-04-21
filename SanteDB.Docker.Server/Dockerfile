@@ -1,8 +1,8 @@
 ﻿# SanteDB Server Dockerfile  
-RUN apt-get update   
-RUN apt-get install -y binutils mono-devel ca-certificates-mono fsharp mono-vbnc nuget referenceassemblies-pcl   
-RUN rm -rf /var/lib/apt/lists/* /tmp/*
 FROM mono:slim
+RUN apt-get update   
+RUN apt-get install -y binutils mono-complete ca-certificates-mono referenceassemblies-pcl   
+RUN rm -rf /var/lib/apt/lists/* /tmp/*
 MAINTAINER "SanteSuite Contributors"
 RUN mkdir /santedb
 RUN mkdir /santedb/data
