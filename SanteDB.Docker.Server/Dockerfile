@@ -9,8 +9,8 @@ RUN mkdir /santedb/data
 COPY ./bin/Release/ /santedb/
 RUN rm -vf /santedb/*nunit*
 RUN rm -vf /santedb/*NUnit*
-RUN mv -vf /santedb/Data/*.dataset /santedb/data/
-RUN rm -rf /santedb/Data
+# RUN mv -vf /santedb/Data/*.dataset /santedb/data/
+# RUN rm -rf /santedb/Data
 WORKDIR /santedb
 EXPOSE 2100/tcp
 EXPOSE 8080/tcp
