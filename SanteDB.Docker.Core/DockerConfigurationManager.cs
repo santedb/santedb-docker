@@ -84,7 +84,7 @@ namespace SanteDB.Docker.Core
                 IDictionary<String, IDockerFeature> features = new Dictionary<String, IDockerFeature>();
 
                 // Load all assemblies into our appdomain 
-                var scanFiles = Directory.GetFiles(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "*.dll").ToList();
+                var scanFiles = Directory.GetFiles(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "SanteDB*.dll").ToList();
                 scanFiles.Add(Assembly.GetEntryAssembly().Location);
                 foreach (var f in scanFiles)
                 {
