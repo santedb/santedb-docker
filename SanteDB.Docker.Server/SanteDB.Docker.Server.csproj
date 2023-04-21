@@ -205,6 +205,14 @@
       <Project>{c4f21107-e045-4d8e-bdb3-be67ede5dd5b}</Project>
       <Name>SanteDB.Security.Certs.BouncyCastle</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\santedb-client\SanteDB.Messaging.AMI.Client\SanteDB.Messaging.AMI.Client.csproj">
+      <Project>{a5aeb9a8-5e50-49c9-94d7-ae0b2d46c5d9}</Project>
+      <Name>SanteDB.Messaging.AMI.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\santedb-client\SanteDB.Messaging.HDSI.Client\SanteDB.Messaging.HDSI.Client.csproj">
+      <Project>{a5a42bfd-1d1d-430f-bf8a-b0e62f06bb1e}</Project>
+      <Name>SanteDB.Messaging.HDSI.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\santedb-data\SanteDB.Persistence.Auditing.ADO\SanteDB.Persistence.Auditing.ADO.csproj">
       <Project>{45ea67a6-48f6-4906-84ec-5c13c80c9cc4}</Project>
       <Name>SanteDB.Persistence.Auditing.ADO</Name>
@@ -216,6 +224,14 @@
     <ProjectReference Include="..\..\santedb-data\SanteDB.Persistence.PubSub.ADO\SanteDB.Persistence.PubSub.ADO.csproj">
       <Project>{b727f549-3b5d-4094-bdfb-55f15756d2d6}</Project>
       <Name>SanteDB.Persistence.PubSub.ADO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\santedb-dc-core\SanteDB.Client.Batteries\SanteDB.Client.Batteries.csproj">
+      <Project>{0caceb40-a400-4f74-b827-aa125e8ae0e9}</Project>
+      <Name>SanteDB.Client.Batteries</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\santedb-dc-core\SanteDB.Client\SanteDB.Client.csproj">
+      <Project>{ca1fa614-e86c-4307-87b8-8b2319a23ed5}</Project>
+      <Name>SanteDB.Client</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\santedb-i18n\SanteDB.Core.i18n\SanteDB.Core.i18n.csproj">
       <Project>{ca7b81dc-b789-4af6-a079-ec84259c101a}</Project>
@@ -232,6 +248,10 @@
     <ProjectReference Include="..\..\santedb-restsvc\SanteDB.Rest.WWW\SanteDB.Rest.WWW.csproj">
       <Project>{09b39a55-466f-4678-a644-fdada2ac5b6a}</Project>
       <Name>SanteDB.Rest.WWW</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SanteDB.Core.Security.Tfa.Twilio\SanteDB.Core.Security.Tfa.Twilio.csproj">
+      <Project>{5a60d6e2-72dd-478a-91a6-e928208ca1ba}</Project>
+      <Name>SanteDB.Core.Security.Tfa.Twilio</Name>
     </ProjectReference>
     <ProjectReference Include="..\SanteDB.Docker.Core\SanteDB.Docker.Core.csproj">
       <Project>{26085d74-f021-442e-a75e-85654afbfc13}</Project>
