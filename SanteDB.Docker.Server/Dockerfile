@@ -1,11 +1,16 @@
 ﻿# SanteDB Server Dockerfile  
-FROM mono
+RUN apt-get update   
+RUN apt-get install -y binutils mono-devel ca-certificates-mono fsharp mono-vbnc nuget referenceassemblies-pcl   
+RUN rm -rf /var/lib/apt/lists/* /tmp/*
+FROM mono:slim
 MAINTAINER "SanteSuite Contributors"
 RUN mkdir /santedb
 RUN mkdir /santedb/data
 COPY ./bin/Release/ /santedb/
-# RUN mv -vf /santedb/Data/*.dataset /santedb/data/
-# RUN rm -rf /santedb/Data
+RUN rm -vf /santedb/*nunit*
+RUN rm -vf /santedb/*NUnit*
+RUN mv -vf /santedb/Data/*.dataset /santedb/data/
+RUN rm -rf /santedb/Data
 WORKDIR /santedb
 EXPOSE 2100/tcp
 EXPOSE 8080/tcp
