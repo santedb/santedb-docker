@@ -71,6 +71,7 @@
     <Compile Include="Features\PrivacyFilterDockerFeature.cs" />
     <Compile Include="Features\SecurityDockerFeature.cs" />
     <Compile Include="Features\SigningDockerFeature.cs" />
+    <Compile Include="Features\SmtpDockerFeature.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
