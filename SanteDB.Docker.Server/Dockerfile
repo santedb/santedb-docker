@@ -1,8 +1,8 @@
 ﻿# SanteDB Server Dockerfile  
 FROM mono:slim
 RUN apt-get update   
-RUN apt-get install -y binutils mono-devl ca-certificates-mono referenceassemblies-pcl   
-RUN apt-get remove lynx
+RUN apt-get install -y binutils mono-devel ca-certificates-mono referenceassemblies-pcl   
+RUN apt-get remove -y lynx
 RUN rm -rf /var/lib/apt/lists/* /tmp/*
 RUN apt-get clean
 MAINTAINER "SanteSuite Contributors"
