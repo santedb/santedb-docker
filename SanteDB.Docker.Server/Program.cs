@@ -23,6 +23,7 @@ using SanteDB.Core;
 using SanteDB.Core.Security;
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Reflection;
 using System.Threading;
 
@@ -41,6 +42,7 @@ namespace SanteDB.Docker.Server
             try
             {
 
+                AppDomain.CurrentDomain.SetData("DataDirectory", Path.GetDirectoryName(typeof(Program).Assembly.Location));
                 Console.WriteLine("SanteDB iCDR Server for Docker and Kubernetes v.{0} ({1})", typeof(Program).Assembly.GetName().Version, typeof(Program).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion);
                 Console.WriteLine("{0}", typeof(Program).Assembly.GetCustomAttribute<AssemblyCopyrightAttribute>().Copyright);
 #if DEBUG
