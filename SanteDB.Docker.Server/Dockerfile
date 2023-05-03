@@ -1,7 +1,5 @@
 ﻿# SanteDB Server Dockerfile  
 FROM mono:latest
-RUN apt-get remove -y lynx
-RUN rm -rf /var/lib/apt/lists/* /tmp/*
 RUN apt-get clean
 MAINTAINER "SanteSuite Contributors"
 RUN mkdir /santedb
