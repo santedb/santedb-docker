@@ -47,24 +47,6 @@
 
       <add type="SanteDB.Rest.Common.RestServiceFactory, SanteDB.Rest.Common" />
 
-      <!-- Security Services -->
-      <add type="SanteDB.Persistence.Auditing.ADO.Services.AdoAuditRepositoryService, SanteDB.Persistence.Auditing.ADO" />
-
-      <!-- Repository Services -->
-      <add type="SanteDB.Server.Core.Services.Impl.LocalRepositoryFactory, SanteDB.Core.Api" />
-      <add type="SanteDB.Core.Applets.Services.Impl.AppletSubscriptionRepository, SanteDB.Core.Applets" />
-      <add type="SanteDB.Core.Security.Audit.AuditDaemonService, SanteDB.Core.Api" />
-
-      <!-- Clinical Services -->
-      <add type="SanteDB.Core.Applets.Services.Impl.FileSystemAppletManagerService, SanteDB.Core.Applets" />
-      <add type="SanteDB.BusinessRules.JavaScript.AppletBusinessRulesDaemon, SanteDB.BusinessRules.JavaScript" />
-
-      <add type="SanteDB.Core.Data.Quality.DataQualityService, SanteDB.Core.Api" />
-      <add type="SanteDB.Core.Applets.Services.Impl.AppletLocalizationService, SanteDB.Core.Applets" />
-      <add type="SanteDB.Core.Applets.Services.Impl.AppletNotificationTemplateRepository, SanteDB.Core.Applets" />
-      <add type="SanteDB.Core.Applets.Services.Impl.AppletForeignDataMapRepository, SanteDB.Core.Applets" />
-
-      <!--<add type="SanteMPI.Persistence.ADO.Services.AdoNameAliasService, SanteMPI.Persistence.ADO" />-->
     </serviceProviders>
   </section>
 </SanteDBConfiguration>

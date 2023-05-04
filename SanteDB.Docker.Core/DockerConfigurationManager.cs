@@ -76,7 +76,7 @@ namespace SanteDB.Docker.Core
                     this.m_configuration = SanteDBConfiguration.Load(s);
                 }
 
-                var enabledFeatures = Environment.GetEnvironmentVariable(DockerConstants.EnvFeatureList)?.Split(';');
+                var enabledFeatures = Environment.GetEnvironmentVariable($"CORE;{DockerConstants.EnvFeatureList}")?.Split(';');
                 if (enabledFeatures == null || enabledFeatures.Length == 0)
                 {
                     throw new InvalidOperationException($"No features configured - use {DockerConstants.EnvFeatureList}");

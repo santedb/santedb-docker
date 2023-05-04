@@ -49,7 +49,7 @@ namespace SanteDB.Docker.Server
                 // Minimum services for startup
                 if (String.IsNullOrEmpty(Environment.GetEnvironmentVariable("SDB_FEATURE")))
                 {
-                    Environment.SetEnvironmentVariable("SDB_FEATURE", "RAMCACHE;ADO;PUBSUB_ADO;SEC;LOG;FHIR;HL7;HDSI;AMI;BIS;SWAGGER;AUDIT_REPO;OPENID");
+                    Environment.SetEnvironmentVariable("SDB_FEATURE", "CORE;RAMCACHE;ADO;PUBSUB_ADO;SEC;LOG;FHIR;HL7;HDSI;AMI;BIS;SWAGGER;AUDIT_REPO;OPENID");
                     Environment.SetEnvironmentVariable("SDB_DB_AUDIT", "server=sdb-postgres; database=audit; user=santedb; password=SanteDB123");
                     Environment.SetEnvironmentVariable("SDB_DB_MAIN", "server=sdb-postgres; database=audit; user=santedb; password=SanteDB123");
                     Environment.SetEnvironmentVariable("SDB_DB_MAIN_PROVIDER", "Npgsql");
