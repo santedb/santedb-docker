@@ -61,6 +61,9 @@
 
       <add type="SanteDB.Core.Data.Quality.DataQualityService, SanteDB.Core.Api" />
       <add type="SanteDB.Core.Applets.Services.Impl.AppletLocalizationService, SanteDB.Core.Applets" />
+      <add type="SanteDB.Core.Applets.Services.Impl.AppletNotificationTemplateRepository, SanteDB.Core.Applets" />
+      <add type="SanteDB.Core.Applets.Services.Impl.AppletForeignDataMapRepository, SanteDB.Core.Applets" />
+
       <!--<add type="SanteMPI.Persistence.ADO.Services.AdoNameAliasService, SanteMPI.Persistence.ADO" />-->
     </serviceProviders>
   </section>
