@@ -63,9 +63,10 @@ namespace SanteDB.Docker.Server
                     Console.WriteLine("Installing Security Certificiates...");
                     SecurityExtensions.InstallCertsForChain();
                 }
-                catch
+                catch (Exception e)
                 {
                     Console.WriteLine("Unable to install security certificates - are you running on Docker and as ROOT?");
+                    Console.WriteLine(e.ToHumanReadableString());
                 }
                 // Wait ?
                 // HACK: Docker doesn't wait for other services to come up
