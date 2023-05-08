@@ -62,7 +62,8 @@ namespace SanteDB.Docker.Server.Features
             typeof(AuditDaemonService),
             typeof(AppletDatasetProvider),
             typeof(FileSystemDatasetProvider),
-            typeof(DataInitializationService)
+            typeof(DataInitializationService),
+            typeof(MonoPlatformSecurityProvider)
         };
 
         /// <inheritdoc/>
