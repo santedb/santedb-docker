@@ -1,24 +1,21 @@
 ﻿using SanteDB.BI.Services.Impl;
+using SanteDB.BusinessRules.JavaScript;
 using SanteDB.Core.Applets.Services.Impl;
 using SanteDB.Core.Configuration;
 using SanteDB.Core.Data.Initialization;
 using SanteDB.Core.Notifications;
 using SanteDB.Core.PubSub.Broker;
+using SanteDB.Core.Security;
+using SanteDB.Core.Security.Audit;
 using SanteDB.Core.Security.Privacy;
 using SanteDB.Core.Security.Tfa;
-using SanteDB.Core.Security;
-using SanteDB.Core.Services.Impl.Repository;
 using SanteDB.Core.Services.Impl;
+using SanteDB.Core.Services.Impl.Repository;
 using SanteDB.Docker.Core;
 using SanteDB.Rest.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SanteDB.BusinessRules.JavaScript;
-using SanteDB.Core.Security.Audit;
-using System.Runtime.CompilerServices;
 
 namespace SanteDB.Docker.Server.Features
 {
@@ -89,7 +86,7 @@ namespace SanteDB.Docker.Server.Features
             }
             foreach (var itm in this.m_serviceTypes)
             {
-                if(!appService.ServiceProviders.Any(t=>t.Type == itm))
+                if (!appService.ServiceProviders.Any(t => t.Type == itm))
                 {
                     appService.ServiceProviders.Add(new TypeReferenceConfiguration(itm));
                 }

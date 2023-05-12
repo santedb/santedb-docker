@@ -77,7 +77,7 @@ namespace SanteDB.Docker.Server
                     Console.WriteLine("Continuing startup...");
                 }
 
-                if(args.Length == 0)
+                if (args.Length == 0)
                 {
                     args = new string[] { String.Empty };
                 }

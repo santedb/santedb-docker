@@ -1,11 +1,9 @@
 ﻿using SanteDB.Core.Configuration;
+using SanteDB.Core.Security;
 using SanteDB.Core.Security.Configuration;
+using SanteDB.Security.Certs.BouncyCastle;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using SanteDB;
-using SanteDB.Core.Security;
-using SanteDB.Security.Certs.BouncyCastle;
 using System.Security.Cryptography.X509Certificates;
 
 namespace SanteDB.Docker.Core.Features
@@ -80,13 +78,14 @@ namespace SanteDB.Docker.Core.Features
                         {
                             throw new InvalidOperationException($"RS256 requires either {GEN_RSA_CERT_SETTING} or {CERT_SETTING} setting");
                         }
-                        else if(!String.IsNullOrEmpty(genRsa))
+                        else if (!String.IsNullOrEmpty(genRsa))
                         {
                             var bcGenerator = new BouncyCastleCertificateGenerator();
                             var keyPair = bcGenerator.CreateKeyPair(2048);
                             var keySubject = $"CN={genRsa}, OID.2.5.6.11=SanteDB.Docker.Program";
                             var platformService = new MonoPlatformSecurityProvider(); // HACK: docker always runs on mono - and we want this logic prior to app context startup
-                            if (platformService.TryGetCertificate(X509FindType.FindBySubjectDistinguishedName, keySubject, out var certificate)) {
+                            if (platformService.TryGetCertificate(X509FindType.FindBySubjectDistinguishedName, keySubject, out var certificate))
+                            {
                                 certificate = bcGenerator.CreateSelfSignedCertificate(keyPair, new X500DistinguishedName(keySubject), new TimeSpan(365, 0, 0, 0), X509KeyUsageFlags.DigitalSignature | X509KeyUsageFlags.DataEncipherment | X509KeyUsageFlags.KeyAgreement);
                                 _ = platformService.TryInstallCertificate(certificate);
                             }
