@@ -19,6 +19,8 @@
  * Date: 2023-3-10
  */
 using SanteDB.Core;
+using SanteDB.Core.Data;
+using SanteDB.Core.Model.EntityLoader;
 using SanteDB.Docker.Core;
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -37,6 +39,7 @@ namespace SanteDB.Docker.Server
         /// </summary>
         internal DockerServerContext(String configurationFile) : base(SanteDBHostType.Server, new DockerConfigurationManager(configurationFile))
         {
+            EntitySource.Current = new EntitySource(new PersistenceEntitySource());
         }
     }
 }
