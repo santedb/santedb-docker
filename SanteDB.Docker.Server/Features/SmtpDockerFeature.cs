@@ -3,8 +3,6 @@ using SanteDB.Docker.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 
 namespace SanteDB.Docker.Server.Features
@@ -34,17 +32,17 @@ namespace SanteDB.Docker.Server.Features
         public void Configure(SanteDBConfiguration configuration, IDictionary<string, string> settings)
         {
             var smtpSection = configuration.GetSection<EmailNotificationConfigurationSection>();
-            if(smtpSection == null)
+            if (smtpSection == null)
             {
                 smtpSection = new EmailNotificationConfigurationSection();
                 configuration.AddSection(smtpSection);
             }
 
-            if(!settings.TryGetValue(SERVER_SETTING_NAME, out var server))
+            if (!settings.TryGetValue(SERVER_SETTING_NAME, out var server))
             {
                 throw new InvalidOperationException($"{SERVER_SETTING_NAME} is required for SMTP");
             }
-            else if(!Uri.TryCreate(server, UriKind.Absolute, out var serverUri))
+            else if (!Uri.TryCreate(server, UriKind.Absolute, out var serverUri))
             {
                 throw new InvalidCastException($"{SERVER_SETTING_NAME} must be in form smtp://[server]:[port]");
             }
@@ -62,7 +60,7 @@ namespace SanteDB.Docker.Server.Features
                 Ssl = XmlConvert.ToBoolean(tls)
             };
 
-            if(settings.TryGetValue(ADMIN_SETTING_NAME, out var admin))
+            if (settings.TryGetValue(ADMIN_SETTING_NAME, out var admin))
             {
                 smtpSection.AdministrativeContacts = admin.Split(';').ToList();
             }
