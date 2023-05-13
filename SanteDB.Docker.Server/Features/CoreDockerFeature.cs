@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 using SanteDB.BusinessRules.JavaScript;
 using SanteDB.Core.Security.Audit;
 using System.Runtime.CompilerServices;
+using SanteDB.Core.Diagnostics.Tracing;
 
 namespace SanteDB.Docker.Server.Features
 {
@@ -35,6 +36,7 @@ namespace SanteDB.Docker.Server.Features
             typeof(DefaultThreadPoolService),
             typeof(DefaultNetworkInformationService),
             typeof(RestServiceFactory),
+            typeof(RolloverLogManagerService),
             typeof(LocalRepositoryFactory),
             typeof(ExemptablePolicyFilterService),
             typeof(LocalMailMessageService),
