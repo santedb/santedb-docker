@@ -87,13 +87,13 @@ namespace SanteDB.Docker.Core
                         new SanteDB.Core.Security.Configuration.SecuritySignatureConfiguration()
                         {
                             Algorithm = SanteDB.Core.Security.Configuration.SignatureAlgorithm.HS256,
-                            HmacSecret = $"@SanteDBDefault$$${DateTime.Now.Year}_{Environment.MachineName}",
+                            HmacSecret = $"@SanteDBDefault$$${DateTime.Now.Year}_{Environment.MachineName}_{Guid.NewGuid()}",
                             KeyName = "jwsdefault"
                         },
                         new SanteDB.Core.Security.Configuration.SecuritySignatureConfiguration()
                         {
                             Algorithm = SanteDB.Core.Security.Configuration.SignatureAlgorithm.HS256,
-                            HmacSecret = $"@SanteDBDefault$$${DateTime.Now.Year}_{Environment.MachineName}",
+                            HmacSecret = $"@SanteDBDefault$$${DateTime.Now.Year}_{Environment.MachineName}_{Guid.NewGuid()}",
                             KeyName = "default"
                         }
                     }
