@@ -16,13 +16,14 @@
  * the License.
  *
  * User: fyfej
- * Date: 2023-3-10
+ * Date: 2023-5-19
  */
 using Mono.Unix;
 using SanteDB.Core;
 using SanteDB.Core.Security;
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Threading;
@@ -45,6 +46,7 @@ namespace SanteDB.Docker.Server
                 AppDomain.CurrentDomain.SetData("DataDirectory", Path.GetDirectoryName(typeof(Program).Assembly.Location));
                 Console.WriteLine("SanteDB iCDR Server for Docker and Kubernetes v.{0} ({1})", typeof(Program).Assembly.GetName().Version, typeof(Program).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion);
                 Console.WriteLine("{0}", typeof(Program).Assembly.GetCustomAttribute<AssemblyCopyrightAttribute>().Copyright);
+                Console.WriteLine("OS: {0} , Culture: {1}", Environment.OSVersion, CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
 #if DEBUG
                 // Minimum services for startup
                 if (String.IsNullOrEmpty(Environment.GetEnvironmentVariable("SDB_FEATURE")))
