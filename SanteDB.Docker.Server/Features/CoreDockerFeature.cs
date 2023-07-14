@@ -48,7 +48,7 @@ namespace SanteDB.Docker.Server.Features
         private readonly Type[] m_serviceTypes =
         {
             typeof(SanteDB.Core.Security.DefaultPolicyEnforcementService),
-            typeof(DefaultOperatingSystemInfoService),
+            typeof(DefaultOperatingSystemService),
             typeof(DataInitializationService),
             typeof(DefaultThreadPoolService),
             typeof(DefaultNetworkInformationService),
