@@ -173,7 +173,7 @@ namespace SanteDB.Docker.Core
             var envVar = Environment.GetEnvironmentVariable($"{DockerConstants.EnvConnectionStringPrefix}{key.ToUpper().Replace(".", "_")}");
             if (String.IsNullOrEmpty(envVar))
             {
-                var retVal = this.m_configuration.GetSection<DataConfigurationSection>().ConnectionString.Find(o => o.Name == key);
+                var retVal = this.m_configuration.GetSection<DataConfigurationSection>()?.ConnectionString?.Find(o => o.Name == key);
                 if (retVal == null)
                 {
                     this.m_transientConnectionStrings.TryGetValue(key, out retVal);
