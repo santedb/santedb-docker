@@ -37,6 +37,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using SanteDB.Core.Diagnostics.Tracing;
+using SanteDB.Cdss.Xml;
 
 namespace SanteDB.Docker.Server.Features
 {
@@ -80,6 +81,7 @@ namespace SanteDB.Docker.Server.Features
             typeof(AppletSubscriptionRepository),
             typeof(AuditDaemonService),
             typeof(AppletDatasetProvider),
+            typeof(AppletClinicalProtocolInstaller),
             typeof(FileSystemDatasetProvider),
             typeof(DataInitializationService),
             typeof(MonoPlatformSecurityProvider)
