@@ -69,6 +69,7 @@
     <Compile Include="Features\CoreDockerFeature.cs" />
     <Compile Include="Features\DiagnosticsDockerFeature.cs" />
     <Compile Include="Features\EmailDockerFeature.cs" />
+    <Compile Include="Features\FileSystemQueueDockerFeature.cs" />
     <Compile Include="Features\PrivacyFilterDockerFeature.cs" />
     <Compile Include="Features\SecurityDockerFeature.cs" />
     <Compile Include="Features\SigningDockerFeature.cs" />
