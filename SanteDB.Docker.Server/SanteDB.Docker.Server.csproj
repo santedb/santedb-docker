@@ -92,7 +92,17 @@
     </PackageReference>
   </ItemGroup>
   <Choose>
-    <When Condition="$(SolutionName.Contains('-ext'))">
+    <When Condition="$(SolutionName.Contains('-nuget'))">
+      <ItemGroup>
+        <PackageReference Include="SanteDB.Messaging.Atna">
+          <Version>$(VersionNumber)</Version>
+        </PackageReference>
+        <PackageReference Include="SanteDB.iCDR.Runtime">
+          <Version>$(VersionNumber)</Version>
+        </PackageReference>
+      </ItemGroup>
+    </When>
+    <Otherwise>
       <ItemGroup>
         <ProjectReference Include="..\..\santedb-api\SanteDB.Core.Api\SanteDB.Core.Api.csproj">
           <Project>{3A45F695-47A2-464C-ACE6-BDABBFA39FBC}</Project>
@@ -182,16 +192,6 @@
           <Project>{649b7c70-ec21-4ac4-b918-c34c84753126}</Project>
           <Name>SanteDB</Name>
         </ProjectReference>
-      </ItemGroup>
-    </When>
-    <Otherwise>
-      <ItemGroup>
-        <PackageReference Include="SanteDB.Messaging.Atna">
-          <Version>$(VersionNumber)</Version>
-        </PackageReference>
-        <PackageReference Include="SanteDB.iCDR.Runtime">
-          <Version>$(VersionNumber)</Version>
-        </PackageReference>
       </ItemGroup>
     </Otherwise>
   </Choose>

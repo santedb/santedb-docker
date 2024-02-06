@@ -34,16 +34,14 @@
   </ItemGroup>
 
   <Choose>
-    <When Condition="$(SolutionName.Contains('-ext'))">
+    <When Condition="$(SolutionName.Contains('-nuget'))">
       <ItemGroup>
-        <ProjectReference Include="..\..\santedb-api\SanteDB.Core.Api\SanteDB.Core.Api.csproj">
-          <Name>SanteDB.Core.Api</Name>
-        </ProjectReference>
+        <PackageReference Include="SanteDB.Core.Api" Version="$(VersionNumber)" />
       </ItemGroup>
     </When>
     <Otherwise>
       <ItemGroup>
-        <PackageReference Include="SanteDB.Core.Api" Version="$(VersionNumber)" />
+        <ProjectReference Include="..\..\santedb-api\SanteDB.Core.Api\SanteDB.Core.Api.csproj" />
       </ItemGroup>
     </Otherwise>
   </Choose>
