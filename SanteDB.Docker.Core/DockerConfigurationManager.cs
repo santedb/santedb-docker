@@ -218,7 +218,7 @@ namespace SanteDB.Docker.Core
 
         /// <inheritdoc/>
         /// <exception cref="NotSupportedException"></exception>
-        public void SaveConfiguration()
+        public void SaveConfiguration(bool restart = true)
         {
             throw new NotSupportedException();
         }
