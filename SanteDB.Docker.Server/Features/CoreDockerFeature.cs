@@ -81,6 +81,7 @@ namespace SanteDB.Docker.Server.Features
             typeof(AppletSubscriptionRepository),
             typeof(AuditDaemonService),
             typeof(AppletDatasetProvider),
+            typeof(AppletTemplateDefinitionInstaller),
             typeof(AppletClinicalProtocolInstaller),
             typeof(FileSystemDatasetProvider),
             typeof(DataInitializationService),
