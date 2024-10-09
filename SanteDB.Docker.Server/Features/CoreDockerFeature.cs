@@ -56,7 +56,6 @@ namespace SanteDB.Docker.Server.Features
             typeof(LocalRepositoryFactory),
             typeof(ExemptablePolicyFilterService),
             typeof(LocalMailMessageService),
-            typeof(LocalStockManagementRepositoryService),
             typeof(PubSubBroker),
             typeof(AppletBiRepository),
             typeof(LocalBiRenderService),
