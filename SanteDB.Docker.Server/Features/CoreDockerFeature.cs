@@ -110,7 +110,7 @@ namespace SanteDB.Docker.Server.Features
             {
                 if (!appService.ServiceProviders.Any(t => t.Type == itm))
                 {
-                    appService.ServiceProviders.Add(new TypeReferenceConfiguration(itm));
+                    appService.AddService(new TypeReferenceConfiguration(itm));
                 }
             }
         }
