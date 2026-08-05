@@ -54,6 +54,14 @@ namespace SanteDB.Docker.Core.Features
             {
                 dxConfig = new DiagnosticsConfigurationSection()
                 {
+                    Sources = new List<TraceSourceConfiguration>()
+                    {
+                        new TraceSourceConfiguration()
+                        {
+                            Filter = System.Diagnostics.Tracing.EventLevel.Informational,
+                            SourceName = "SanteDB"
+                        }
+                    },
                     TraceWriter = new List<TraceWriterConfiguration>()
                     {
                         new TraceWriterConfiguration()
