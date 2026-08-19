@@ -27,7 +27,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SanteSuite Contributors")]
 [assembly: AssemblyProduct("SanteDB iCDR Server for Docker")]
-[assembly: AssemblyCopyright("Copyright (C) 2020 - 2024 The SanteSuite Contributors (See NOTICE.md)")]
+[assembly: AssemblyCopyright("Copyright (C) 2020 - 2026 The SanteSuite Contributors (See NOTICE.md)")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -48,4 +48,4 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
-[assembly: AssemblyInformationalVersion("Alberta (for Docker or Kubernetes)")]
+[assembly: AssemblyInformationalVersion("Chippewa (for Docker or Kubernetes)")]
